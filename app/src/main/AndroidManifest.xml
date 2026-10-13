@@ -14,6 +14,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +22,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".gesture.GestureActivity"
+            android:exported="false"
+            android:label="@string/demo_gesture"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".physics.PhysicsActivity"
+            android:exported="false"
+            android:label="@string/demo_physics"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chart.ChartActivity"
+            android:exported="false"
+            android:label="@string/demo_chart"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".particle.ParticleActivity"
+            android:exported="false"
+            android:label="@string/demo_particle"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".drawing.DrawingActivity"
+            android:exported="false"
+            android:label="@string/demo_drawing"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

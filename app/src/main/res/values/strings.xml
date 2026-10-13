@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">MotionCanvas</string>
+    <string name="demo_gesture">Gesture Animation</string>
+    <string name="demo_gesture_desc">Kéo, vuốt, phóng to và bật lò xo</string>
+    <string name="demo_physics">Physics</string>
+    <string name="demo_physics_desc">Trọng lực, va chạm và lò xo</string>
+    <string name="demo_chart">Dynamic Charts</string>
+    <string name="demo_chart_desc">Line realtime, bar và donut động</string>
+    <string name="demo_particle">Particle: Lửa &amp; Nước</string>
+    <string name="demo_particle_desc">Hệ thống hạt với object pool</string>
+    <string name="demo_drawing">Drawing</string>
+    <string name="demo_drawing_desc">Brush tùy chỉnh và bảng chọn màu</string>
+    <string name="coming_soon">Đang phát triển…</string>
+    <string name="clear">Xóa hết</string>
 </resources>
