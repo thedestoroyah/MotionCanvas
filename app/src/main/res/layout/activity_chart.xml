@@ -20,5 +20,37 @@
             android:id="@+id/line_chart"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/chart_bar"
+            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+        <vn.edu.tdtu.motioncanvas.chart.BarChartView
+            android:id="@+id/bar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/chart_donut"
+            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+        <vn.edu.tdtu.motioncanvas.chart.DonutChartView
+            android:id="@+id/donut_chart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <Button
+            android:id="@+id/btn_shuffle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="@string/chart_shuffle" />
     </LinearLayout>
 </ScrollView>

@@ -13,4 +13,9 @@
     <string name="coming_soon">Đang phát triển…</string>
     <string name="clear">Xóa hết</string>
     <string name="chart_line">Line chart realtime</string>
+    <string name="chart_bar">Bar chart</string>
+    <string name="chart_donut">Donut chart</string>
+    <string name="chart_shuffle">Đổi dữ liệu</string>
+    <string name="chart_tap_hint">Chạm vào vòng</string>
+    <string name="chart_no_data">Không có dữ liệu</string>
 </resources>
