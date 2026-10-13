@@ -1,9 +1,24 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MotionCanvas" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources>
+    <!-- Chỉ có giao diện sáng; theme có ActionBar để mọi màn demo có tiêu đề + nút quay lại -->
+    <style name="Base.Theme.MotionCanvas" parent="Theme.Material3.Light">
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorOnSecondary">@color/brand_on_secondary</item>
+        <item name="android:colorBackground">@color/brand_background</item>
+        <item name="actionBarStyle">@style/Widget.MotionCanvas.ActionBar</item>
     </style>
 
     <style name="Theme.MotionCanvas" parent="Base.Theme.MotionCanvas" />
+
+    <!-- Home có header riêng nên ẩn ActionBar -->
+    <style name="Theme.MotionCanvas.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- homeAsUp: hiện mũi tên quay lại; AppCompat tự điều hướng theo parentActivityName -->
+    <style name="Widget.MotionCanvas.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="displayOptions">showTitle|homeAsUp</item>
+    </style>
 </resources>

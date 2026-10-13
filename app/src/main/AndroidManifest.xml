@@ -15,10 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MotionCanvas">
+        <!-- singleTop: nút quay lại trên ActionBar trở về Home cũ thay vì tạo Home mới -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.MotionCanvas.NoActionBar"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,26 +33,31 @@
             android:name=".gesture.GestureActivity"
             android:exported="false"
             android:label="@string/demo_gesture"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".physics.PhysicsActivity"
             android:exported="false"
             android:label="@string/demo_physics"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".chart.ChartActivity"
             android:exported="false"
             android:label="@string/demo_chart"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".particle.ParticleActivity"
             android:exported="false"
             android:label="@string/demo_particle"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".drawing.DrawingActivity"
             android:exported="false"
             android:label="@string/demo_drawing"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
     </application>
 
