@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp">
+    app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/demo_preview"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:background="@color/preview_background" />
 
         <TextView
             android:id="@+id/demo_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceTitleMedium" />
+            android:paddingHorizontal="12dp"
+            android:paddingTop="10dp"
+            android:textAppearance="?attr/textAppearanceTitleSmall" />
 
         <TextView
             android:id="@+id/demo_desc"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textAppearance="?attr/textAppearanceBodyMedium" />
+            android:maxLines="2"
+            android:paddingHorizontal="12dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="12dp"
+            android:textAppearance="?attr/textAppearanceBodySmall" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

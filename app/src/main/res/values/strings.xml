@@ -41,4 +41,5 @@
     <string name="symmetry_mirror">Gương</string>
     <string name="replay">Phát lại</string>
     <string name="chart_smooth">Đường cong</string>
+    <string name="home_subtitle">Animation &amp; Canvas · Android</string>
 </resources>

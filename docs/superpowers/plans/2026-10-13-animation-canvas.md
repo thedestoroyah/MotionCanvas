@@ -4967,7 +4967,7 @@ import vn.edu.tdtu.canvasdemo.playground.PlaygroundActivity;
 và thêm phần tử cuối vào mảng `DEMOS` (ngay sau dòng `DrawingActivity`):
 
 ```java
-            new Demo(R.string.demo_playground, R.string.demo_playground_desc, PlaygroundActivity.class),
+            new Demo(R.string.demo_playground, R.string.demo_playground_desc, PlaygroundActivity.class, PhysicsPreview::new),
 ```
 
 Trong `AndroidManifest.xml`, thêm cạnh các `<activity>` khác:
@@ -4977,6 +4977,7 @@ Trong `AndroidManifest.xml`, thêm cạnh các `<activity>` khác:
             android:name=".playground.PlaygroundActivity"
             android:exported="false"
             android:label="@string/demo_playground"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 ```
 

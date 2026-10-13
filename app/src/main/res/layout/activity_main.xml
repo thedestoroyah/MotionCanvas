@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
 
     <LinearLayout
-        android:id="@+id/demo_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -15,6 +15,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textAppearance="?attr/textAppearanceHeadlineSmall" />
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textColor="@color/brand_primary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/home_subtitle"
+            android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+        <GridLayout
+            android:id="@+id/demo_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2" />
     </LinearLayout>
 </ScrollView>
