@@ -39,4 +39,25 @@ public final class ChartMath {
         int index = Math.round((x - start) / step);
         return Math.max(0, Math.min(count - 1, index));
     }
+
+    /**
+     * Điểm điều khiển Bézier bậc ba để vẽ đường Catmull-Rom đi qua đúng n điểm (xs[i], ys[i]).
+     * Đoạn i → i+1 ghi vào out[4i..4i+3] = c1x, c1y, c2x, c2y. Hai đầu dùng chính điểm biên làm điểm kề.
+     */
+    public static void catmullRomControls(float[] xs, float[] ys, int n, float[] out) {
+        for (int i = 0; i < n - 1; i++) {
+            int prev = Math.max(0, i - 1);
+            int next = Math.min(n - 1, i + 2);
+            out[4 * i] = xs[i] + (xs[i + 1] - xs[prev]) / 6f;
+            out[4 * i + 1] = ys[i] + (ys[i + 1] - ys[prev]) / 6f;
+            out[4 * i + 2] = xs[i + 1] - (xs[next] - xs[i]) / 6f;
+            out[4 * i + 3] = ys[i + 1] - (ys[next] - ys[i]) / 6f;
+        }
+    }
+
+    /** Giá trị đường Bézier bậc ba tại t ∈ [0, 1] trên một trục. */
+    public static float cubicAt(float p0, float c1, float c2, float p1, float t) {
+        float u = 1f - t;
+        return u * u * u * p0 + 3f * u * u * t * c1 + 3f * u * t * t * c2 + t * t * t * p1;
+    }
 }

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
+
 import java.util.Random;
 
 import vn.edu.tdtu.motioncanvas.R;
@@ -26,6 +28,9 @@ public class ChartActivity extends AppCompatActivity {
 
         barChart = findViewById(R.id.bar_chart);
         donutChart = findViewById(R.id.donut_chart);
+        LineChartView lineChart = findViewById(R.id.line_chart);
+        MaterialSwitch smoothSwitch = findViewById(R.id.switch_smooth);
+        smoothSwitch.setOnCheckedChangeListener((button, checked) -> lineChart.setSmooth(checked));
         findViewById(R.id.btn_shuffle).setOnClickListener(v -> shuffle());
         shuffle();
     }

@@ -10,11 +10,25 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/chart_line"
-            android:textAppearance="?attr/textAppearanceTitleMedium" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/chart_line"
+                android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_smooth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chart_smooth" />
+        </LinearLayout>
 
         <vn.edu.tdtu.motioncanvas.chart.LineChartView
             android:id="@+id/line_chart"

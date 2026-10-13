@@ -40,4 +40,5 @@
     <string name="symmetry_off">Tắt</string>
     <string name="symmetry_mirror">Gương</string>
     <string name="replay">Phát lại</string>
+    <string name="chart_smooth">Đường cong</string>
 </resources>
