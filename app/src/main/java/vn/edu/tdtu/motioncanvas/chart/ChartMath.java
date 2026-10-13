@@ -22,16 +22,6 @@ public final class ChartMath {
         return deg < 0f ? deg + 360f : deg;
     }
 
-    /** Chỉ số phần donut chứa góc `angleDeg` (đo từ 12 giờ), -1 nếu không có. */
-    public static int sliceAt(float angleDeg, float[] sweeps) {
-        float start = 0f;
-        for (int i = 0; i < sweeps.length; i++) {
-            if (sweeps[i] > 0f && angleDeg >= start && angleDeg < start + sweeps[i]) return i;
-            start += sweeps[i];
-        }
-        return -1;
-    }
-
     /** Chỉ số phần tử gần x nhất, với phần tử i nằm ở start + i·step. */
     public static int nearestIndex(float x, float start, float step, int count) {
         if (count <= 0) return -1;

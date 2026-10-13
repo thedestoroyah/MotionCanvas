@@ -30,19 +30,6 @@ public class ChartMathTest {
     }
 
     @Test
-    public void sliceAtFindsContainingSlice() {
-        float[] sweeps = {90f, 180f, 90f};
-        assertEquals(0, ChartMath.sliceAt(45f, sweeps));
-        assertEquals(1, ChartMath.sliceAt(90f, sweeps));
-        assertEquals(2, ChartMath.sliceAt(300f, sweeps));
-    }
-
-    @Test
-    public void sliceAtWithEmptyDataReturnsMinusOne() {
-        assertEquals(-1, ChartMath.sliceAt(10f, new float[]{0f, 0f}));
-    }
-
-    @Test
     public void nearestIndexRoundsAndClamps() {
         assertEquals(2, ChartMath.nearestIndex(24f, 0f, 10f, 5));
         assertEquals(3, ChartMath.nearestIndex(26f, 0f, 10f, 5));
