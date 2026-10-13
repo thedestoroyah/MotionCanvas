@@ -33,4 +33,10 @@
     <string name="save_ok">Đã lưu ảnh vào Thư viện</string>
     <string name="save_failed">Lưu thất bại: %1$s</string>
     <string name="save_permission_denied">Cần quyền bộ nhớ để lưu ảnh</string>
+    <string name="brush_calligraphy">Thư pháp</string>
+    <string name="brush_rainbow">Cầu vồng</string>
+    <string name="brush_fill">Đổ màu</string>
+    <string name="symmetry_label">Đối xứng: %1$s</string>
+    <string name="symmetry_off">Tắt</string>
+    <string name="symmetry_mirror">Gương</string>
 </resources>

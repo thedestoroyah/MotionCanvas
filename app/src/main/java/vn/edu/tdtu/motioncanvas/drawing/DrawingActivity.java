@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -48,6 +49,7 @@ public class DrawingActivity extends AppCompatActivity {
                 }
             });
     private DrawingView drawingView;
+    private Button symmetryButton;
     private float density;
 
     @Override
@@ -64,6 +66,12 @@ public class DrawingActivity extends AppCompatActivity {
         brushes.setOnCheckedChangeListener((group, checkedId) -> drawingView.setBrush(brushFor(checkedId)));
         SeekBars.onProgress(findViewById(R.id.seek_width), p -> drawingView.setStrokeWidth(Math.max(1, p) * density));
         buildSwatches(findViewById(R.id.swatch_row));
+        symmetryButton = findViewById(R.id.btn_symmetry);
+        symmetryButton.setOnClickListener(v -> {
+            drawingView.setSymmetry(drawingView.getSymmetry().next());
+            showSymmetry();
+        });
+        showSymmetry();
         findViewById(R.id.btn_palette).setOnClickListener(v -> showColorPicker());
         findViewById(R.id.btn_undo).setOnClickListener(v -> drawingView.undo());
         findViewById(R.id.btn_redo).setOnClickListener(v -> drawingView.redo());
@@ -81,8 +89,24 @@ public class DrawingActivity extends AppCompatActivity {
         if (checkedId == R.id.brush_marker) return BrushType.MARKER;
         if (checkedId == R.id.brush_spray) return BrushType.SPRAY;
         if (checkedId == R.id.brush_neon) return BrushType.NEON;
+        if (checkedId == R.id.brush_calligraphy) return BrushType.CALLIGRAPHY;
+        if (checkedId == R.id.brush_rainbow) return BrushType.RAINBOW;
+        if (checkedId == R.id.brush_fill) return BrushType.FILL;
         if (checkedId == R.id.brush_eraser) return BrushType.ERASER;
         return BrushType.PEN;
+    }
+
+    private void showSymmetry() {
+        Symmetry s = drawingView.getSymmetry();
+        String name;
+        if (s == Symmetry.OFF) {
+            name = getString(R.string.symmetry_off);
+        } else if (s == Symmetry.MIRROR) {
+            name = getString(R.string.symmetry_mirror);
+        } else {
+            name = String.valueOf(s.rotations);
+        }
+        symmetryButton.setText(getString(R.string.symmetry_label, name));
     }
 
     private void buildSwatches(LinearLayout row) {

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Path;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -13,13 +12,10 @@ import android.view.View;
 import java.util.Random;
 
 /**
- * Các nét đã xong được vẽ sẵn lên Bitmap offscreen (`committed`); nét đang vẽ được vẽ đè mỗi frame.
- * Undo/Redo = vẽ lại Bitmap từ danh sách nét trong UndoStack.
+ * Các mục đã xong được vẽ sẵn lên Bitmap offscreen (`committed`); nét đang vẽ được vẽ đè mỗi frame.
+ * Undo/Redo = dựng lại Bitmap từ danh sách mục trong UndoStack.
  */
 public class DrawingView extends View {
-    private static final int SPRAY_DOTS = 12;
-    private static final float SPRAY_RADIUS_FACTOR = 1.5f;
-    private static final float SPRAY_DOT_FACTOR = 0.1f;
     private static final float DEFAULT_WIDTH_DP = 8f;
 
     private final UndoStack<Stroke> history = new UndoStack<>();
@@ -31,9 +27,12 @@ public class DrawingView extends View {
     private Stroke current;
     private float lastX;
     private float lastY;
+    private long lastTime;
+    private float lastWidthFactor;
     private BrushType brush = BrushType.PEN;
     private int color = Color.BLACK;
     private float strokeWidth;
+    private Symmetry symmetry = Symmetry.OFF;
 
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -59,6 +58,14 @@ public class DrawingView extends View {
         strokeWidth = px;
     }
 
+    public void setSymmetry(Symmetry symmetry) {
+        this.symmetry = symmetry;
+    }
+
+    public Symmetry getSymmetry() {
+        return symmetry;
+    }
+
     public void undo() {
         if (history.undo()) rebuild();
     }
@@ -73,7 +80,7 @@ public class DrawingView extends View {
         rebuild();
     }
 
-    /** Ảnh để lưu: nền trắng + các nét đã xong. */
+    /** Ảnh để lưu: nền trắng + các mục đã xong. */
     public Bitmap exportBitmap() {
         Bitmap out = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(out);
@@ -93,7 +100,7 @@ public class DrawingView extends View {
     private void rebuild() {
         if (committedCanvas == null) return;
         committed.eraseColor(Color.TRANSPARENT);
-        for (Stroke s : history.items()) renderer.draw(committedCanvas, s);
+        for (Stroke s : history.items()) renderer.commit(committed, committedCanvas, s);
         invalidate();
     }
 
@@ -104,7 +111,7 @@ public class DrawingView extends View {
         // Lớp riêng: tẩy (CLEAR) chỉ đục lớp vẽ, không đục nền trắng
         int layer = canvas.saveLayer(0f, 0f, getWidth(), getHeight(), null);
         canvas.drawBitmap(committed, 0f, 0f, null);
-        if (current != null) renderer.draw(canvas, current);
+        if (current != null) renderer.draw(canvas, current, current.pointCount());
         canvas.restoreToCount(layer);
     }
 
@@ -114,35 +121,27 @@ public class DrawingView extends View {
         float y = e.getY();
         switch (e.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                current = new Stroke(brush, color, strokeWidth, new Path());
-                if (brush == BrushType.SPRAY) {
-                    sprayAt(x, y);
-                } else {
-                    current.path.moveTo(x, y);
-                }
                 lastX = x;
                 lastY = y;
+                lastTime = e.getEventTime();
+                if (brush == BrushType.FILL) return true; // đổ màu khi nhấc tay
+                current = new Stroke(brush, color, strokeWidth, symmetry,
+                        getWidth() / 2f, getHeight() / 2f, random.nextLong());
+                lastWidthFactor = 1f;
+                current.addPoint(x, y, lastWidthFactor);
                 invalidate();
                 return true;
             case MotionEvent.ACTION_MOVE:
                 if (current == null) return true;
-                if (brush == BrushType.SPRAY) {
-                    sprayAt(x, y);
-                } else {
-                    // Đường cong qua trung điểm → nét mượt, không gãy khúc
-                    current.path.quadTo(lastX, lastY, (x + lastX) / 2f, (y + lastY) / 2f);
-                }
-                lastX = x;
-                lastY = y;
+                current.addPoint(x, y, widthFactorAt(x, y, e.getEventTime()));
                 invalidate();
                 return true;
             case MotionEvent.ACTION_UP:
-                if (current != null) {
-                    if (brush != BrushType.SPRAY) current.path.lineTo(x, y);
-                    history.push(current);
-                    renderer.draw(committedCanvas, current);
-                    current = null;
-                    invalidate();
+                if (brush == BrushType.FILL) {
+                    commitFill(x, y);
+                } else if (current != null) {
+                    current.addPoint(x, y, widthFactorAt(x, y, e.getEventTime()));
+                    commitCurrent();
                 }
                 performClick();
                 return true;
@@ -160,15 +159,34 @@ public class DrawingView extends View {
         return super.performClick();
     }
 
-    /** Rải chấm ngẫu nhiên trong hình tròn quanh ngón tay; sqrt để chấm phân bố đều theo diện tích. */
-    private void sprayAt(float x, float y) {
-        float radius = strokeWidth * SPRAY_RADIUS_FACTOR;
-        float dot = Math.max(density, strokeWidth * SPRAY_DOT_FACTOR);
-        for (int i = 0; i < SPRAY_DOTS; i++) {
-            double angle = random.nextDouble() * 2 * Math.PI;
-            float r = (float) Math.sqrt(random.nextDouble()) * radius;
-            current.path.addCircle(x + (float) Math.cos(angle) * r, y + (float) Math.sin(angle) * r,
-                    dot, Path.Direction.CW);
+    /** Thư pháp: hệ số độ dày theo tốc độ tay (dp/ms), làm mượt; brush khác luôn là 1. */
+    private float widthFactorAt(float x, float y, long time) {
+        if (current.type != BrushType.CALLIGRAPHY) return 1f;
+        long dt = time - lastTime;
+        if (dt > 0) {
+            float speed = (float) Math.hypot(x - lastX, y - lastY) / density / dt;
+            lastWidthFactor = CalligraphyWidth.smooth(lastWidthFactor, CalligraphyWidth.factor(speed));
+            lastX = x;
+            lastY = y;
+            lastTime = time;
+        }
+        return lastWidthFactor;
+    }
+
+    private void commitCurrent() {
+        history.push(current);
+        renderer.commit(committed, committedCanvas, current);
+        current = null;
+        invalidate();
+    }
+
+    /** Đổ màu không theo đối xứng; vùng đã đúng màu thì không thêm gì vào lịch sử. */
+    private void commitFill(float x, float y) {
+        Stroke fill = new Stroke(BrushType.FILL, color, 0f, Symmetry.OFF, 0f, 0f, 0L);
+        fill.addPoint(x, y, 1f);
+        if (renderer.applyFill(committed, fill)) {
+            history.push(fill);
+            invalidate();
         }
     }
 }
