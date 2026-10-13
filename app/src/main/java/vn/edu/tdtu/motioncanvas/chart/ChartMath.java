@@ -50,4 +50,13 @@ public final class ChartMath {
         float u = 1f - t;
         return u * u * u * p0 + 3f * u * u * t * c1 + 3f * u * t * t * c2 + t * t * t * p1;
     }
+
+    /**
+     * Độ cao (y) của đầu đường tại mép phải vùng vẽ, khi điểm mới nhất còn đang trượt vào.
+     * scrollOffset = 1 → điểm mới vừa xuất hiện, đầu đường còn ở điểm trước; 0 → đã tới điểm mới.
+     */
+    public static float leadingY(float prevY, float lastY, float scrollOffset) {
+        float t = 1f - Math.max(0f, Math.min(1f, scrollOffset));
+        return prevY + t * (lastY - prevY);
+    }
 }

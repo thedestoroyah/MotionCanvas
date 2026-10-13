@@ -199,8 +199,12 @@ public class LineChartView extends View {
         canvas.clipRect(plot);
         canvas.drawPath(fillPath, fillPaint);
         canvas.drawPath(linePath, linePaint);
-        drawPulse(canvas, xs[n - 1], ys[n - 1]);
         canvas.restore();
+
+        // Điểm mới nhất luôn nằm ở/phía phải mép vùng vẽ nên sẽ bị cắt: đặt chấm nhấp nháy ở đúng
+        // đầu đường nhìn thấy (mép phải), độ cao nội suy theo đoạn cuối, và vẽ ngoài vùng cắt
+        float headY = n >= 2 ? ChartMath.leadingY(ys[n - 2], ys[n - 1], scrollOffset) : ys[0];
+        drawPulse(canvas, plot.right, headY);
 
         if (selectedIndex >= 0 && selectedIndex < n) {
             float px = xs[selectedIndex];

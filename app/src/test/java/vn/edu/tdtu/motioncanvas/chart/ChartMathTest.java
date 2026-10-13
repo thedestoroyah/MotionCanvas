@@ -71,4 +71,17 @@ public class ChartMathTest {
         ChartMath.catmullRomControls(new float[0], new float[0], 0, out);
         assertArrayEquals(new float[]{9f, 9f, 9f, 9f}, out, 0f);
     }
+
+    @Test
+    public void leadingYInterpolatesAlongTheLastSegment() {
+        assertEquals(10f, ChartMath.leadingY(10f, 30f, 1f), 1e-4f); // điểm mới vừa xuất hiện: còn ở điểm trước
+        assertEquals(20f, ChartMath.leadingY(10f, 30f, 0.5f), 1e-4f);
+        assertEquals(30f, ChartMath.leadingY(10f, 30f, 0f), 1e-4f); // đã trượt xong: ở điểm mới
+    }
+
+    @Test
+    public void leadingYClampsScrollOffsetOutsideZeroToOne() {
+        assertEquals(10f, ChartMath.leadingY(10f, 30f, 5f), 1e-4f);
+        assertEquals(30f, ChartMath.leadingY(10f, 30f, -5f), 1e-4f);
+    }
 }
