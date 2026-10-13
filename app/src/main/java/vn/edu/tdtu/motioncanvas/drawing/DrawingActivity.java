@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -77,12 +78,24 @@ public class DrawingActivity extends AppCompatActivity {
         findViewById(R.id.btn_redo).setOnClickListener(v -> drawingView.redo());
         findViewById(R.id.btn_clear).setOnClickListener(v -> drawingView.clear());
         findViewById(R.id.btn_save).setOnClickListener(v -> onSaveClicked());
+        View controls = findViewById(R.id.controls);
+        findViewById(R.id.btn_replay).setOnClickListener(v -> drawingView.startReplay());
+        // Trong lúc phát lại khóa mọi điều khiển; chạm vào tranh để dừng
+        drawingView.setReplayListener(replaying -> setEnabledTree(controls, !replaying));
     }
 
     @Override
     protected void onDestroy() {
         io.shutdown();
         super.onDestroy();
+    }
+
+    private static void setEnabledTree(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); i++) setEnabledTree(group.getChildAt(i), enabled);
+        }
     }
 
     private static BrushType brushFor(int checkedId) {

@@ -3,6 +3,9 @@ package vn.edu.tdtu.motioncanvas.drawing;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.Test;
 
 public class ReplayTimelineTest {
@@ -51,5 +54,30 @@ public class ReplayTimelineTest {
         assertArrayEquals(new int[]{0, 0}, out);
         timeline.locate(9f, out);
         assertArrayEquals(new int[]{1, 5}, out);
+    }
+
+    private static Stroke pen() {
+        return new Stroke(BrushType.PEN, 0xFF000000, 8f, Symmetry.OFF, 0f, 0f, 0L);
+    }
+
+    @Test
+    public void firstAfterLastClearWithoutClearIsZero() {
+        assertEquals(0, ReplayTimeline.firstAfterLastClear(Arrays.asList(pen(), pen())));
+    }
+
+    @Test
+    public void firstAfterLastClearSkipsEverythingBeforeTheLastClear() {
+        assertEquals(4, ReplayTimeline.firstAfterLastClear(
+                Arrays.asList(pen(), Stroke.CLEAR, pen(), Stroke.CLEAR, pen())));
+    }
+
+    @Test
+    public void firstAfterLastClearWhenClearIsLast() {
+        assertEquals(2, ReplayTimeline.firstAfterLastClear(Arrays.asList(pen(), Stroke.CLEAR)));
+    }
+
+    @Test
+    public void firstAfterLastClearOfEmptyHistoryIsZero() {
+        assertEquals(0, ReplayTimeline.firstAfterLastClear(Collections.emptyList()));
     }
 }

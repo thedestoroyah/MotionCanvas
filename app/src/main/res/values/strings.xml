@@ -39,4 +39,5 @@
     <string name="symmetry_label">Đối xứng: %1$s</string>
     <string name="symmetry_off">Tắt</string>
     <string name="symmetry_mirror">Gương</string>
+    <string name="replay">Phát lại</string>
 </resources>

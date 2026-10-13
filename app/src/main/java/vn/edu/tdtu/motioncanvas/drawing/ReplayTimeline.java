@@ -1,5 +1,7 @@
 package vn.edu.tdtu.motioncanvas.drawing;
 
+import java.util.List;
+
 /** Ánh xạ tiến độ replay (0..1) sang "đang vẽ nét nào, tới điểm thứ mấy". */
 final class ReplayTimeline {
     static final long MIN_DURATION_MS = 2000L;
@@ -14,6 +16,14 @@ final class ReplayTimeline {
         int sum = 0;
         for (int c : counts) sum += c;
         total = sum;
+    }
+
+    /** Replay chỉ phát bức tranh đang thấy: bỏ mọi mục trước lần "Xóa hết" cuối cùng. */
+    static int firstAfterLastClear(List<Stroke> items) {
+        for (int i = items.size() - 1; i >= 0; i--) {
+            if (items.get(i) == Stroke.CLEAR) return i + 1;
+        }
+        return 0;
     }
 
     int total() {
