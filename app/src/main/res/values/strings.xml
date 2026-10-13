@@ -28,4 +28,9 @@
     <string name="undo">Hoàn tác</string>
     <string name="redo">Làm lại</string>
     <string name="save">Lưu</string>
+    <string name="pick_color">Chọn màu</string>
+    <string name="swatch_desc">Màu %1$s</string>
+    <string name="save_ok">Đã lưu ảnh vào Thư viện</string>
+    <string name="save_failed">Lưu thất bại: %1$s</string>
+    <string name="save_permission_denied">Cần quyền bộ nhớ để lưu ảnh</string>
 </resources>
