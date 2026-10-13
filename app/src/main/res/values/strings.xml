@@ -18,4 +18,14 @@
     <string name="chart_shuffle">Đổi dữ liệu</string>
     <string name="chart_tap_hint">Chạm vào vòng</string>
     <string name="chart_no_data">Không có dữ liệu</string>
+    <string name="brush_pen">Bút</string>
+    <string name="brush_marker">Marker</string>
+    <string name="brush_spray">Phun</string>
+    <string name="brush_neon">Neon</string>
+    <string name="brush_eraser">Tẩy</string>
+    <string name="stroke_width">Độ dày</string>
+    <string name="palette">Màu…</string>
+    <string name="undo">Hoàn tác</string>
+    <string name="redo">Làm lại</string>
+    <string name="save">Lưu</string>
 </resources>
