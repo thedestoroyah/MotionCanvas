@@ -2,7 +2,7 @@
 
 - **Ngày:** 13/10/2026 · **Hạn nộp:** hết ngày 30/10/2026
 - **Đề tài:** Topic 02 – #1 "Learn about Animation & Canvas and build an illustrated application", nhóm mục **1.1**
-- **Nhóm:** 2 người (gọi là **A** và **B** trong tài liệu này; người dùng Claude Code để làm là **B**)
+- **Nhóm:** 2 người (gọi là **A** và **B** trong tài liệu này)
 
 ## 1. Mục tiêu và tiêu chí thành công
 

@@ -23,9 +23,9 @@
 
 Mỗi người chỉ cần đọc phần "Chung" + track của mình. Task B6 dùng `World` (A1) và `Emitter` (A4) — chữ ký của chúng nằm trong khối **Interfaces** của A1/A4.
 
-**Quy ước lệnh:** mọi lệnh `./gradlew` và `git` chạy trong **tab Terminal của Android Studio**, tại thư mục gốc project `CanvasDemo/` (tab này đã có sẵn JDK nên không cần cài `JAVA_HOME`).
+**Quy ước lệnh:** mọi lệnh `./gradlew` và `git` chạy trong **tab Terminal của Android Studio**, tại thư mục gốc project `MotionCanvas/` (tab này đã có sẵn JDK nên không cần cài `JAVA_HOME`).
 
-**Package:** plan dùng `vn.edu.tdtu.canvasdemo`. Nếu chọn package khác lúc tạo project thì thay toàn bộ chuỗi này (cả đường dẫn thư mục `vn/edu/tdtu/canvasdemo`) trước khi làm.
+**Package:** plan dùng `vn.edu.tdtu.motioncanvas`. Nếu chọn package khác lúc tạo project thì thay toàn bộ chuỗi này (cả đường dẫn thư mục `vn/edu/tdtu/MotionCanvas`) trước khi làm.
 
 **Làm việc chung trên Git:** cả hai commit lên `main`, luôn `git pull --rebase` trước khi `git push`. Xung đột chỉ có thể xảy ra ở `strings.xml` (hai người cùng thêm chuỗi) → giữ cả hai phía.
 
@@ -57,7 +57,7 @@ Mỗi người chỉ cần đọc phần "Chung" + track của mình. Task B6 d�
 ### Task 0.1: Tạo project, thêm thư viện, khởi tạo Git
 
 **Files:**
-- Create: toàn bộ project `CanvasDemo/` (Android Studio sinh ra)
+- Create: toàn bộ project `MotionCanvas/` (Android Studio sinh ra)
 - Modify: `gradle/libs.versions.toml`, `app/build.gradle.kts`
 
 **Interfaces:**
@@ -69,9 +69,9 @@ File → New → New Project… → tab *Phone and Tablet* → **Empty Views Act
 
 | Ô | Giá trị |
 |---|---|
-| Name | `CanvasDemo` |
-| Package name | `vn.edu.tdtu.canvasdemo` |
-| Save location | `.../Mid_Exam/CanvasDemo` |
+| Name | `MotionCanvas` |
+| Package name | `vn.edu.tdtu.motioncanvas` |
+| Save location | `.../Mid_Exam/MotionCanvas` |
 | Language | Java |
 | Minimum SDK | API 24 ("Nougat"; Android 7.0) |
 | Build configuration language | Kotlin DSL (build.gradle.kts) — mặc định |
@@ -115,12 +115,12 @@ Expected: `BUILD SUCCESSFUL`
 mv ../docs ./docs
 git init -b main
 git add .
-git commit -m "chore: create CanvasDemo project with dynamicanimation"
+git commit -m "chore: create MotionCanvas project with dynamicanimation"
 ```
 
 - [ ] **Step 6: Tạo repo GitHub và mời A**
 
-Trên github.com: New repository → tên `CanvasDemo` → **Private** → không tick README/.gitignore → Create. Sau đó:
+Trên github.com: New repository → tên `MotionCanvas` → **Private** → không tick README/.gitignore → Create. Sau đó:
 
 ```bash
 git remote add origin <URL repo vừa tạo>
@@ -134,13 +134,13 @@ Settings → Collaborators → mời tài khoản GitHub của A.
 ### Task 0.2: Màn Home, Activity khung, tiện ích dùng chung
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/core/FrameClock.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/core/SystemBars.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/core/SeekBars.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/{gesture/GestureActivity, physics/PhysicsActivity, chart/ChartActivity, particle/ParticleActivity, drawing/DrawingActivity}.java` (khung)
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/core/FrameClock.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/core/SystemBars.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/core/SeekBars.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/{gesture/GestureActivity, physics/PhysicsActivity, chart/ChartActivity, particle/ParticleActivity, drawing/DrawingActivity}.java` (khung)
 - Create: `app/src/main/res/layout/activity_demo_stub.xml`, `app/src/main/res/layout/item_demo.xml`
-- Modify: `app/src/main/java/vn/edu/tdtu/canvasdemo/MainActivity.java`, `app/src/main/res/layout/activity_main.xml`, `app/src/main/AndroidManifest.xml`, `app/src/main/res/values/strings.xml`
-- Test: `app/src/test/java/vn/edu/tdtu/canvasdemo/core/FrameClockTest.java`
+- Modify: `app/src/main/java/vn/edu/tdtu/MotionCanvas/MainActivity.java`, `app/src/main/res/layout/activity_main.xml`, `app/src/main/AndroidManifest.xml`, `app/src/main/res/values/strings.xml`
+- Test: `app/src/test/java/vn/edu/tdtu/MotionCanvas/core/FrameClockTest.java`
 
 **Interfaces:**
 - Produces (dùng ở các task sau):
@@ -152,10 +152,10 @@ Settings → Collaborators → mời tài khoản GitHub của A.
 
 - [ ] **Step 1: Viết test cho FrameClock**
 
-`app/src/test/java/vn/edu/tdtu/canvasdemo/core/FrameClockTest.java`:
+`app/src/test/java/vn/edu/tdtu/MotionCanvas/core/FrameClockTest.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.core;
+package vn.edu.tdtu.motioncanvas.core;
 
 import static org.junit.Assert.assertEquals;
 
@@ -190,15 +190,15 @@ public class FrameClockTest {
 
 - [ ] **Step 2: Chạy test, xác nhận FAIL**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.core.FrameClockTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.core.FrameClockTest"`
 Expected: FAIL — `cannot find symbol: class FrameClock`
 
 - [ ] **Step 3: Viết FrameClock**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/core/FrameClock.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/core/FrameClock.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.core;
+package vn.edu.tdtu.motioncanvas.core;
 
 import java.util.function.LongSupplier;
 
@@ -232,15 +232,15 @@ public final class FrameClock {
 
 - [ ] **Step 4: Chạy test, xác nhận PASS**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.core.FrameClockTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.core.FrameClockTest"`
 Expected: PASS (3 tests)
 
 - [ ] **Step 5: Viết SystemBars và SeekBars**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/core/SystemBars.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/core/SystemBars.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.core;
+package vn.edu.tdtu.motioncanvas.core;
 
 import android.view.View;
 
@@ -263,10 +263,10 @@ public final class SystemBars {
 }
 ```
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/core/SeekBars.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/core/SeekBars.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.core;
+package vn.edu.tdtu.motioncanvas.core;
 
 import android.widget.SeekBar;
 
@@ -397,18 +397,18 @@ Ghi đè `app/src/main/res/layout/activity_main.xml`:
 
 Tạo 5 file sau, nội dung giống nhau, chỉ khác package và tên class.
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/gesture/GestureActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/gesture/GestureActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.gesture;
+package vn.edu.tdtu.motioncanvas.gesture;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class GestureActivity extends AppCompatActivity {
     @Override
@@ -421,18 +421,18 @@ public class GestureActivity extends AppCompatActivity {
 }
 ```
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/physics/PhysicsActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/PhysicsActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.physics;
+package vn.edu.tdtu.motioncanvas.physics;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class PhysicsActivity extends AppCompatActivity {
     @Override
@@ -445,18 +445,18 @@ public class PhysicsActivity extends AppCompatActivity {
 }
 ```
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class ChartActivity extends AppCompatActivity {
     @Override
@@ -469,18 +469,18 @@ public class ChartActivity extends AppCompatActivity {
 }
 ```
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/particle/ParticleActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/ParticleActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.particle;
+package vn.edu.tdtu.motioncanvas.particle;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class ParticleActivity extends AppCompatActivity {
     @Override
@@ -493,18 +493,18 @@ public class ParticleActivity extends AppCompatActivity {
 }
 ```
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/DrawingActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/DrawingActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class DrawingActivity extends AppCompatActivity {
     @Override
@@ -519,10 +519,10 @@ public class DrawingActivity extends AppCompatActivity {
 
 - [ ] **Step 9: MainActivity**
 
-Ghi đè `app/src/main/java/vn/edu/tdtu/canvasdemo/MainActivity.java`:
+Ghi đè `app/src/main/java/vn/edu/tdtu/MotionCanvas/MainActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo;
+package vn.edu.tdtu.motioncanvas;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -535,12 +535,12 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.chart.ChartActivity;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
-import vn.edu.tdtu.canvasdemo.drawing.DrawingActivity;
-import vn.edu.tdtu.canvasdemo.gesture.GestureActivity;
-import vn.edu.tdtu.canvasdemo.particle.ParticleActivity;
-import vn.edu.tdtu.canvasdemo.physics.PhysicsActivity;
+import vn.edu.tdtu.motioncanvas.chart.ChartActivity;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.drawing.DrawingActivity;
+import vn.edu.tdtu.motioncanvas.gesture.GestureActivity;
+import vn.edu.tdtu.motioncanvas.particle.ParticleActivity;
+import vn.edu.tdtu.motioncanvas.physics.PhysicsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -640,10 +640,10 @@ Trước khi bắt đầu: `git pull` để có Phần 0.
 ### Task A1: Engine vật lý (`Body`, `Spring`, `World`)
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/physics/Body.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/physics/Spring.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/physics/World.java`
-- Test: `app/src/test/java/vn/edu/tdtu/canvasdemo/physics/WorldTest.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/Body.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/Spring.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/World.java`
+- Test: `app/src/test/java/vn/edu/tdtu/MotionCanvas/physics/WorldTest.java`
 
 **Interfaces:**
 - Consumes: không có.
@@ -661,10 +661,10 @@ Trước khi bắt đầu: `git pull` để có Phần 0.
 
 - [ ] **Step 1: Viết test**
 
-`app/src/test/java/vn/edu/tdtu/canvasdemo/physics/WorldTest.java`:
+`app/src/test/java/vn/edu/tdtu/MotionCanvas/physics/WorldTest.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.physics;
+package vn.edu.tdtu.motioncanvas.physics;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -854,15 +854,15 @@ public class WorldTest {
 
 - [ ] **Step 2: Chạy test, xác nhận FAIL**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.physics.WorldTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.physics.WorldTest"`
 Expected: FAIL — `cannot find symbol: class World`
 
 - [ ] **Step 3: Viết Body và Spring**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/physics/Body.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/Body.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.physics;
+package vn.edu.tdtu.motioncanvas.physics;
 
 /** Quả bóng tròn trong mô phỏng. Đơn vị: pixel và pixel/giây. */
 public class Body {
@@ -891,10 +891,10 @@ public class Body {
 }
 ```
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/physics/Spring.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/Spring.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.physics;
+package vn.edu.tdtu.motioncanvas.physics;
 
 /** Lò xo nối một Body với điểm neo cố định (định luật Hooke + giảm chấn). */
 public class Spring {
@@ -920,10 +920,10 @@ public class Spring {
 
 - [ ] **Step 4: Viết World**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/physics/World.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/World.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.physics;
+package vn.edu.tdtu.motioncanvas.physics;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1129,13 +1129,13 @@ public class World {
 
 - [ ] **Step 5: Chạy test, xác nhận PASS**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.physics.WorldTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.physics.WorldTest"`
 Expected: PASS (12 tests)
 
 - [ ] **Step 6: Commit**
 
 ```bash
-git add app/src/main/java/vn/edu/tdtu/canvasdemo/physics app/src/test/java/vn/edu/tdtu/canvasdemo/physics
+git add app/src/main/java/vn/edu/tdtu/MotionCanvas/physics app/src/test/java/vn/edu/tdtu/MotionCanvas/physics
 git commit -m "feat: add physics world with gravity, collisions and springs"
 git pull --rebase && git push
 ```
@@ -1145,9 +1145,9 @@ git pull --rebase && git push
 ### Task A2: Màn Physics
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/physics/PhysicsView.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/PhysicsView.java`
 - Create: `app/src/main/res/layout/activity_physics.xml`
-- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/canvasdemo/physics/PhysicsActivity.java`
+- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/PhysicsActivity.java`
 - Modify: `app/src/main/res/values/strings.xml`
 
 **Interfaces:**
@@ -1166,10 +1166,10 @@ Trong `strings.xml`, thêm:
 
 - [ ] **Step 2: Viết PhysicsView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/physics/PhysicsView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/PhysicsView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.physics;
+package vn.edu.tdtu.motioncanvas.physics;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -1181,8 +1181,8 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.FrameClock;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.FrameClock;
 
 /** Chạm chỗ trống → tạo bóng; chạm vào bóng → giữ và kéo; thả → bóng rơi / con lắc dao động. */
 public class PhysicsView extends View {
@@ -1334,7 +1334,7 @@ public class PhysicsView extends View {
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <vn.edu.tdtu.canvasdemo.physics.PhysicsView
+    <vn.edu.tdtu.motioncanvas.physics.PhysicsView
         android:id="@+id/physics_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -1379,19 +1379,19 @@ public class PhysicsView extends View {
 
 - [ ] **Step 4: Ghi đè PhysicsActivity**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/physics/PhysicsActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/physics/PhysicsActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.physics;
+package vn.edu.tdtu.motioncanvas.physics;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SeekBars;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SeekBars;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class PhysicsActivity extends AppCompatActivity {
     private PhysicsView physicsView;
@@ -1452,12 +1452,12 @@ git pull --rebase && git push
 ### Task A3: Màn Gesture
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/gesture/GestureMath.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/gesture/GestureView.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/gesture/GestureMath.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/gesture/GestureView.java`
 - Create: `app/src/main/res/layout/activity_gesture.xml`
-- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/canvasdemo/gesture/GestureActivity.java`
+- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/MotionCanvas/gesture/GestureActivity.java`
 - Modify: `app/src/main/res/values/strings.xml`
-- Test: `app/src/test/java/vn/edu/tdtu/canvasdemo/gesture/GestureMathTest.java`
+- Test: `app/src/test/java/vn/edu/tdtu/MotionCanvas/gesture/GestureMathTest.java`
 
 **Interfaces:**
 - Consumes: `SystemBars` (Task 0.2); `androidx.dynamicanimation` (Task 0.1).
@@ -1465,10 +1465,10 @@ git pull --rebase && git push
 
 - [ ] **Step 1: Viết test**
 
-`app/src/test/java/vn/edu/tdtu/canvasdemo/gesture/GestureMathTest.java`:
+`app/src/test/java/vn/edu/tdtu/MotionCanvas/gesture/GestureMathTest.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.gesture;
+package vn.edu.tdtu.motioncanvas.gesture;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -1497,15 +1497,15 @@ public class GestureMathTest {
 
 - [ ] **Step 2: Chạy test, xác nhận FAIL**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.gesture.GestureMathTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.gesture.GestureMathTest"`
 Expected: FAIL — `cannot find symbol: variable GestureMath`
 
 - [ ] **Step 3: Viết GestureMath**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/gesture/GestureMath.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/gesture/GestureMath.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.gesture;
+package vn.edu.tdtu.motioncanvas.gesture;
 
 final class GestureMath {
     private GestureMath() {
@@ -1530,7 +1530,7 @@ final class GestureMath {
 
 - [ ] **Step 4: Chạy test, xác nhận PASS**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.gesture.GestureMathTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.gesture.GestureMathTest"`
 Expected: PASS (3 tests)
 
 - [ ] **Step 5: Thêm chuỗi**
@@ -1542,10 +1542,10 @@ Expected: PASS (3 tests)
 
 - [ ] **Step 6: Viết GestureView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/gesture/GestureView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/gesture/GestureView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.gesture;
+package vn.edu.tdtu.motioncanvas.gesture;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -1567,7 +1567,7 @@ import androidx.dynamicanimation.animation.FloatPropertyCompat;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
 
-import vn.edu.tdtu.canvasdemo.R;
+import vn.edu.tdtu.motioncanvas.R;
 
 /** Thẻ: kéo để di chuyển, vuốt để trượt có ma sát, pinch để phóng to, chạm đúp để bật lò xo về giữa. */
 public class GestureView extends View {
@@ -1785,24 +1785,24 @@ public class GestureView extends View {
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <vn.edu.tdtu.canvasdemo.gesture.GestureView
+    <vn.edu.tdtu.motioncanvas.gesture.GestureView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>
 ```
 
-Ghi đè `app/src/main/java/vn/edu/tdtu/canvasdemo/gesture/GestureActivity.java`:
+Ghi đè `app/src/main/java/vn/edu/tdtu/MotionCanvas/gesture/GestureActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.gesture;
+package vn.edu.tdtu.motioncanvas.gesture;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class GestureActivity extends AppCompatActivity {
     @Override
@@ -1829,7 +1829,7 @@ Run: `./gradlew :app:assembleDebug` → `BUILD SUCCESSFUL`. Home → Gesture, đ
 - [ ] **Step 9: Commit**
 
 ```bash
-git add app/src/main app/src/test/java/vn/edu/tdtu/canvasdemo/gesture
+git add app/src/main app/src/test/java/vn/edu/tdtu/MotionCanvas/gesture
 git commit -m "feat: add gesture screen with drag, fling, pinch and spring back"
 git pull --rebase && git push
 ```
@@ -1839,10 +1839,10 @@ git pull --rebase && git push
 ### Task A4: Hệ thống hạt (`Particle`, `Emitter`, `ParticlePalette`)
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/particle/Particle.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/particle/Emitter.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/particle/ParticlePalette.java`
-- Test: `app/src/test/java/vn/edu/tdtu/canvasdemo/particle/EmitterTest.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/Particle.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/Emitter.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/ParticlePalette.java`
+- Test: `app/src/test/java/vn/edu/tdtu/MotionCanvas/particle/EmitterTest.java`
 
 **Interfaces:**
 - Consumes: không có.
@@ -1857,10 +1857,10 @@ git pull --rebase && git push
 
 - [ ] **Step 1: Viết test**
 
-`app/src/test/java/vn/edu/tdtu/canvasdemo/particle/EmitterTest.java`:
+`app/src/test/java/vn/edu/tdtu/MotionCanvas/particle/EmitterTest.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.particle;
+package vn.edu.tdtu.motioncanvas.particle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -1970,15 +1970,15 @@ public class EmitterTest {
 
 - [ ] **Step 2: Chạy test, xác nhận FAIL**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.particle.EmitterTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.particle.EmitterTest"`
 Expected: FAIL — `cannot find symbol: class Emitter`
 
 - [ ] **Step 3: Viết Particle**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/particle/Particle.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/Particle.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.particle;
+package vn.edu.tdtu.motioncanvas.particle;
 
 /** Một hạt trong pool. Field để public vì View đọc chúng mỗi frame; chỉ Emitter được ghi. */
 public final class Particle {
@@ -2003,10 +2003,10 @@ public final class Particle {
 
 - [ ] **Step 4: Viết Emitter**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/particle/Emitter.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/Emitter.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.particle;
+package vn.edu.tdtu.motioncanvas.particle;
 
 import java.util.Random;
 
@@ -2184,15 +2184,15 @@ public class Emitter {
 
 - [ ] **Step 5: Chạy test, xác nhận PASS**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.particle.EmitterTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.particle.EmitterTest"`
 Expected: PASS (7 tests)
 
 - [ ] **Step 6: Viết ParticlePalette**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/particle/ParticlePalette.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/ParticlePalette.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.particle;
+package vn.edu.tdtu.motioncanvas.particle;
 
 import android.graphics.Color;
 
@@ -2216,7 +2216,7 @@ public final class ParticlePalette {
 - [ ] **Step 7: Commit**
 
 ```bash
-git add app/src/main/java/vn/edu/tdtu/canvasdemo/particle app/src/test/java/vn/edu/tdtu/canvasdemo/particle
+git add app/src/main/java/vn/edu/tdtu/MotionCanvas/particle app/src/test/java/vn/edu/tdtu/MotionCanvas/particle
 git commit -m "feat: add pooled particle emitter for fire and water"
 git pull --rebase && git push
 ```
@@ -2226,9 +2226,9 @@ git pull --rebase && git push
 ### Task A5: Màn Particle
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/particle/ParticleView.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/ParticleView.java`
 - Create: `app/src/main/res/layout/activity_particle.xml`
-- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/canvasdemo/particle/ParticleActivity.java`
+- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/ParticleActivity.java`
 - Modify: `app/src/main/res/values/strings.xml`
 
 **Interfaces:**
@@ -2245,10 +2245,10 @@ git pull --rebase && git push
 
 - [ ] **Step 2: Viết ParticleView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/particle/ParticleView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/ParticleView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.particle;
+package vn.edu.tdtu.motioncanvas.particle;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -2263,8 +2263,8 @@ import android.view.View;
 
 import java.util.Random;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.FrameClock;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.FrameClock;
 
 /** Vẽ hạt lửa/nước; kéo ngón tay để di chuyển nguồn phát. */
 public class ParticleView extends View {
@@ -2384,7 +2384,7 @@ public class ParticleView extends View {
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <vn.edu.tdtu.canvasdemo.particle.ParticleView
+    <vn.edu.tdtu.motioncanvas.particle.ParticleView
         android:id="@+id/particle_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -2419,10 +2419,10 @@ public class ParticleView extends View {
 
 - [ ] **Step 4: Ghi đè ParticleActivity**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/particle/ParticleActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/particle/ParticleActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.particle;
+package vn.edu.tdtu.motioncanvas.particle;
 
 import android.os.Bundle;
 
@@ -2431,8 +2431,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class ParticleActivity extends AppCompatActivity {
     private ParticleView particleView;
@@ -2491,10 +2491,10 @@ git pull --rebase && git push
 ### Task B1: Toán của chart (`ChartScale`, `ChartMath`)
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartScale.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartMath.java`
-- Test: `app/src/test/java/vn/edu/tdtu/canvasdemo/chart/ChartScaleTest.java`
-- Test: `app/src/test/java/vn/edu/tdtu/canvasdemo/chart/ChartMathTest.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartScale.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartMath.java`
+- Test: `app/src/test/java/vn/edu/tdtu/MotionCanvas/chart/ChartScaleTest.java`
+- Test: `app/src/test/java/vn/edu/tdtu/MotionCanvas/chart/ChartMathTest.java`
 
 **Interfaces:**
 - Consumes: không có.
@@ -2507,10 +2507,10 @@ git pull --rebase && git push
 
 - [ ] **Step 1: Viết test**
 
-`app/src/test/java/vn/edu/tdtu/canvasdemo/chart/ChartScaleTest.java`:
+`app/src/test/java/vn/edu/tdtu/MotionCanvas/chart/ChartScaleTest.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -2549,10 +2549,10 @@ public class ChartScaleTest {
 }
 ```
 
-`app/src/test/java/vn/edu/tdtu/canvasdemo/chart/ChartMathTest.java`:
+`app/src/test/java/vn/edu/tdtu/MotionCanvas/chart/ChartMathTest.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -2609,15 +2609,15 @@ public class ChartMathTest {
 
 - [ ] **Step 2: Chạy test, xác nhận FAIL**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.chart.*"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.chart.*"`
 Expected: FAIL — `cannot find symbol: class ChartScale`
 
 - [ ] **Step 3: Viết ChartScale**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartScale.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartScale.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 /** Ánh xạ tuyến tính giá trị dữ liệu [min, max] → pixel [pixelStart, pixelEnd]. */
 public final class ChartScale {
@@ -2648,10 +2648,10 @@ public final class ChartScale {
 
 - [ ] **Step 4: Viết ChartMath**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartMath.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartMath.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 public final class ChartMath {
     private ChartMath() {
@@ -2697,13 +2697,13 @@ public final class ChartMath {
 
 - [ ] **Step 5: Chạy test, xác nhận PASS**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.chart.*"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.chart.*"`
 Expected: PASS (11 tests)
 
 - [ ] **Step 6: Commit**
 
 ```bash
-git add app/src/main/java/vn/edu/tdtu/canvasdemo/chart app/src/test/java/vn/edu/tdtu/canvasdemo/chart
+git add app/src/main/java/vn/edu/tdtu/MotionCanvas/chart app/src/test/java/vn/edu/tdtu/MotionCanvas/chart
 git commit -m "feat: add chart scale and donut math helpers"
 git pull --rebase && git push
 ```
@@ -2713,10 +2713,10 @@ git pull --rebase && git push
 ### Task B2: Line chart realtime
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartAxes.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/LineChartView.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartAxes.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/LineChartView.java`
 - Create: `app/src/main/res/layout/activity_chart.xml`
-- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartActivity.java`
+- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartActivity.java`
 - Modify: `app/src/main/res/values/strings.xml`
 
 **Interfaces:**
@@ -2733,10 +2733,10 @@ git pull --rebase && git push
 
 - [ ] **Step 2: Viết ChartAxes**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartAxes.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartAxes.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -2797,10 +2797,10 @@ final class ChartAxes {
 
 - [ ] **Step 3: Viết LineChartView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/chart/LineChartView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/LineChartView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -3034,7 +3034,7 @@ public class LineChartView extends View {
             android:text="@string/chart_line"
             android:textAppearance="?attr/textAppearanceTitleMedium" />
 
-        <vn.edu.tdtu.canvasdemo.chart.LineChartView
+        <vn.edu.tdtu.motioncanvas.chart.LineChartView
             android:id="@+id/line_chart"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
@@ -3042,18 +3042,18 @@ public class LineChartView extends View {
 </ScrollView>
 ```
 
-Ghi đè `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartActivity.java`:
+Ghi đè `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class ChartActivity extends AppCompatActivity {
     @Override
@@ -3087,9 +3087,9 @@ git pull --rebase && git push
 ### Task B3: Bar chart, Donut chart, hoàn thiện màn Chart
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/BarChartView.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/DonutChartView.java`
-- Modify (ghi đè): `app/src/main/res/layout/activity_chart.xml`, `app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartActivity.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/BarChartView.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/DonutChartView.java`
+- Modify (ghi đè): `app/src/main/res/layout/activity_chart.xml`, `app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartActivity.java`
 - Modify: `app/src/main/res/values/strings.xml`
 
 **Interfaces:**
@@ -3110,10 +3110,10 @@ git pull --rebase && git push
 
 - [ ] **Step 2: Viết BarChartView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/chart/BarChartView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/BarChartView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import android.animation.FloatArrayEvaluator;
 import android.animation.ValueAnimator;
@@ -3244,10 +3244,10 @@ public class BarChartView extends View {
 
 - [ ] **Step 3: Viết DonutChartView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/chart/DonutChartView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/DonutChartView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -3262,7 +3262,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import java.util.Locale;
 
-import vn.edu.tdtu.canvasdemo.R;
+import vn.edu.tdtu.motioncanvas.R;
 
 /** Donut chart: các phần quét từ 0° đến 360°; chạm vào vòng để xem phần trăm. Chú thích bên phải. */
 public class DonutChartView extends View {
@@ -3434,7 +3434,7 @@ public class DonutChartView extends View {
             android:text="@string/chart_line"
             android:textAppearance="?attr/textAppearanceTitleMedium" />
 
-        <vn.edu.tdtu.canvasdemo.chart.LineChartView
+        <vn.edu.tdtu.motioncanvas.chart.LineChartView
             android:id="@+id/line_chart"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
@@ -3446,7 +3446,7 @@ public class DonutChartView extends View {
             android:text="@string/chart_bar"
             android:textAppearance="?attr/textAppearanceTitleMedium" />
 
-        <vn.edu.tdtu.canvasdemo.chart.BarChartView
+        <vn.edu.tdtu.motioncanvas.chart.BarChartView
             android:id="@+id/bar_chart"
             android:layout_width="match_parent"
             android:layout_height="220dp" />
@@ -3458,7 +3458,7 @@ public class DonutChartView extends View {
             android:text="@string/chart_donut"
             android:textAppearance="?attr/textAppearanceTitleMedium" />
 
-        <vn.edu.tdtu.canvasdemo.chart.DonutChartView
+        <vn.edu.tdtu.motioncanvas.chart.DonutChartView
             android:id="@+id/donut_chart"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
@@ -3476,10 +3476,10 @@ public class DonutChartView extends View {
 
 - [ ] **Step 5: Ghi đè ChartActivity**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/chart/ChartActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/chart/ChartActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.chart;
+package vn.edu.tdtu.motioncanvas.chart;
 
 import android.os.Bundle;
 
@@ -3488,8 +3488,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class ChartActivity extends AppCompatActivity {
     private static final float MIN_RANDOM_VALUE = 10f;
@@ -3550,15 +3550,15 @@ git pull --rebase && git push
 ### Task B4: App vẽ — brush, undo/redo, độ dày
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/UndoStack.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/BrushType.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/Stroke.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/StrokeRenderer.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/DrawingView.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/UndoStack.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/BrushType.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/Stroke.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/StrokeRenderer.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/DrawingView.java`
 - Create: `app/src/main/res/layout/activity_drawing.xml`
-- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/DrawingActivity.java`
+- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/DrawingActivity.java`
 - Modify: `app/src/main/res/values/strings.xml`
-- Test: `app/src/test/java/vn/edu/tdtu/canvasdemo/drawing/UndoStackTest.java`
+- Test: `app/src/test/java/vn/edu/tdtu/MotionCanvas/drawing/UndoStackTest.java`
 
 **Interfaces:**
 - Consumes: `SystemBars`, `SeekBars`, `@string/clear` (Task 0.2).
@@ -3570,10 +3570,10 @@ git pull --rebase && git push
 
 - [ ] **Step 1: Viết test UndoStack**
 
-`app/src/test/java/vn/edu/tdtu/canvasdemo/drawing/UndoStackTest.java`:
+`app/src/test/java/vn/edu/tdtu/MotionCanvas/drawing/UndoStackTest.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -3629,15 +3629,15 @@ public class UndoStackTest {
 
 - [ ] **Step 2: Chạy test, xác nhận FAIL**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.drawing.UndoStackTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.drawing.UndoStackTest"`
 Expected: FAIL — `cannot find symbol: class UndoStack`
 
 - [ ] **Step 3: Viết UndoStack**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/UndoStack.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/UndoStack.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -3675,23 +3675,23 @@ public final class UndoStack<T> {
 
 - [ ] **Step 4: Chạy test, xác nhận PASS**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.drawing.UndoStackTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.drawing.UndoStackTest"`
 Expected: PASS (4 tests)
 
 - [ ] **Step 5: BrushType, Stroke, StrokeRenderer**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/BrushType.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/BrushType.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 public enum BrushType { PEN, MARKER, SPRAY, NEON, ERASER }
 ```
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/Stroke.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/Stroke.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import android.graphics.Path;
 
@@ -3714,10 +3714,10 @@ public final class Stroke {
 }
 ```
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/StrokeRenderer.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/StrokeRenderer.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -3800,10 +3800,10 @@ final class StrokeRenderer {
 
 - [ ] **Step 6: Viết DrawingView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/DrawingView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/DrawingView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -4006,7 +4006,7 @@ public class DrawingView extends View {
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <vn.edu.tdtu.canvasdemo.drawing.DrawingView
+    <vn.edu.tdtu.motioncanvas.drawing.DrawingView
         android:id="@+id/drawing_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -4146,10 +4146,10 @@ public class DrawingView extends View {
 
 - [ ] **Step 9: Ghi đè DrawingActivity (bản B4 — B5 bổ sung màu và lưu)**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/DrawingActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/DrawingActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import android.os.Bundle;
 import android.widget.RadioGroup;
@@ -4157,9 +4157,9 @@ import android.widget.RadioGroup;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SeekBars;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SeekBars;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class DrawingActivity extends AppCompatActivity {
     private DrawingView drawingView;
@@ -4209,7 +4209,7 @@ Run: `./gradlew :app:assembleDebug` → `BUILD SUCCESSFUL`. Home → Drawing, đ
 - [ ] **Step 11: Commit**
 
 ```bash
-git add app/src/main app/src/test/java/vn/edu/tdtu/canvasdemo/drawing
+git add app/src/main app/src/test/java/vn/edu/tdtu/MotionCanvas/drawing
 git commit -m "feat: add drawing screen with custom brushes and undo/redo"
 git pull --rebase && git push
 ```
@@ -4219,12 +4219,12 @@ git pull --rebase && git push
 ### Task B5: Bảng chọn màu HSV, ô màu nhanh, lưu ảnh vào Gallery
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/PickerMath.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/ColorPickerView.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/ImageSaver.java`
-- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/DrawingActivity.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/PickerMath.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/ColorPickerView.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/ImageSaver.java`
+- Modify (ghi đè): `app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/DrawingActivity.java`
 - Modify: `app/src/main/AndroidManifest.xml`, `app/src/main/res/values/strings.xml`
-- Test: `app/src/test/java/vn/edu/tdtu/canvasdemo/drawing/PickerMathTest.java`
+- Test: `app/src/test/java/vn/edu/tdtu/MotionCanvas/drawing/PickerMathTest.java`
 
 **Interfaces:**
 - Consumes: `DrawingView` (B4): `setColor`, `getColor`, `exportBitmap`; layout ids `swatch_row`, `btn_palette`, `btn_save` (B4).
@@ -4235,10 +4235,10 @@ git pull --rebase && git push
 
 - [ ] **Step 1: Viết test**
 
-`app/src/test/java/vn/edu/tdtu/canvasdemo/drawing/PickerMathTest.java`:
+`app/src/test/java/vn/edu/tdtu/MotionCanvas/drawing/PickerMathTest.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import static org.junit.Assert.assertEquals;
 
@@ -4273,15 +4273,15 @@ public class PickerMathTest {
 
 - [ ] **Step 2: Chạy test, xác nhận FAIL**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.drawing.PickerMathTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.drawing.PickerMathTest"`
 Expected: FAIL — `cannot find symbol: variable PickerMath`
 
 - [ ] **Step 3: Viết PickerMath**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/PickerMath.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/PickerMath.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 final class PickerMath {
     private PickerMath() {
@@ -4303,15 +4303,15 @@ final class PickerMath {
 
 - [ ] **Step 4: Chạy test, xác nhận PASS**
 
-Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.canvasdemo.drawing.PickerMathTest"`
+Run: `./gradlew :app:testDebugUnitTest --tests "vn.edu.tdtu.motioncanvas.drawing.PickerMathTest"`
 Expected: PASS (4 tests)
 
 - [ ] **Step 5: Viết ColorPickerView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/ColorPickerView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/ColorPickerView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -4470,10 +4470,10 @@ public class ColorPickerView extends View {
 
 - [ ] **Step 6: Viết ImageSaver**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/ImageSaver.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/ImageSaver.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -4489,7 +4489,7 @@ import java.io.OutputStream;
 
 /** Lưu Bitmap thành PNG vào thư viện ảnh qua MediaStore. Gọi trên luồng nền. */
 final class ImageSaver {
-    private static final String ALBUM = "CanvasDemo";
+    private static final String ALBUM = "MotionCanvas";
 
     private ImageSaver() {
     }
@@ -4548,10 +4548,10 @@ Trong `app/src/main/AndroidManifest.xml`, thêm ngay trên thẻ `<application`:
 
 - [ ] **Step 9: Ghi đè DrawingActivity (bản đầy đủ)**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/drawing/DrawingActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/drawing/DrawingActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.drawing;
+package vn.edu.tdtu.motioncanvas.drawing;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -4580,9 +4580,9 @@ import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.core.SeekBars;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.core.SeekBars;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class DrawingActivity extends AppCompatActivity {
     private static final int[] SWATCHES = {
@@ -4710,13 +4710,13 @@ Run: `./gradlew :app:testDebugUnitTest :app:assembleDebug` → `BUILD SUCCESSFUL
 - Kéo trên vòng → ô vuông đổi tông màu; kéo trong ô vuông → chấm chọn đổi theo, góc trái trên trắng, đáy đen.
 - Bắt đầu kéo trong ô vuông rồi trượt ra ngoài → chấm dừng ở mép, không nhảy sang chọn hue.
 - OK → vẽ ra đúng màu đã chọn; Cancel → giữ màu cũ.
-- "Lưu" → Toast "Đã lưu ảnh vào Thư viện"; mở app Ảnh/Files → thấy ảnh trong `Pictures/CanvasDemo` (Android 10+), nền trắng, vùng tẩy cũng trắng.
+- "Lưu" → Toast "Đã lưu ảnh vào Thư viện"; mở app Ảnh/Files → thấy ảnh trong `Pictures/MotionCanvas` (Android 10+), nền trắng, vùng tẩy cũng trắng.
 - Nếu có máy/emulator Android 7–9: lần đầu bấm Lưu hiện xin quyền; từ chối → Toast "Cần quyền bộ nhớ để lưu ảnh", không crash.
 
 - [ ] **Step 11: Commit**
 
 ```bash
-git add app/src/main app/src/test/java/vn/edu/tdtu/canvasdemo/drawing
+git add app/src/main app/src/test/java/vn/edu/tdtu/MotionCanvas/drawing
 git commit -m "feat: add HSV color picker, swatches and save to gallery"
 git pull --rebase && git push
 ```
@@ -4728,10 +4728,10 @@ git pull --rebase && git push
 > **Chỉ làm khi** đến 26/10 cả 5 màn đã qua checklist của chúng, và A đã push A1 + A4. Nếu không kịp: bỏ qua task này, không ảnh hưởng điểm tối thiểu.
 
 **Files:**
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/playground/PlaygroundView.java`
-- Create: `app/src/main/java/vn/edu/tdtu/canvasdemo/playground/PlaygroundActivity.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/playground/PlaygroundView.java`
+- Create: `app/src/main/java/vn/edu/tdtu/MotionCanvas/playground/PlaygroundActivity.java`
 - Create: `app/src/main/res/layout/activity_playground.xml`
-- Modify: `app/src/main/java/vn/edu/tdtu/canvasdemo/MainActivity.java`, `app/src/main/AndroidManifest.xml`, `app/src/main/res/values/strings.xml`
+- Modify: `app/src/main/java/vn/edu/tdtu/MotionCanvas/MainActivity.java`, `app/src/main/AndroidManifest.xml`, `app/src/main/res/values/strings.xml`
 
 **Interfaces:**
 - Consumes: `World`, `Body`, `World.CollisionListener` (A1); `Emitter`, `Particle`, `ParticlePalette` (A4); `LineChartView.setDataSource`, `LineChartView.SAMPLE_INTERVAL_MS` (B2); `FrameClock`, `SystemBars` (Task 0.2).
@@ -4747,10 +4747,10 @@ git pull --rebase && git push
 
 - [ ] **Step 2: Viết PlaygroundView**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/playground/PlaygroundView.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/playground/PlaygroundView.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.playground;
+package vn.edu.tdtu.motioncanvas.playground;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -4763,12 +4763,12 @@ import android.view.View;
 
 import java.util.Random;
 
-import vn.edu.tdtu.canvasdemo.core.FrameClock;
-import vn.edu.tdtu.canvasdemo.particle.Emitter;
-import vn.edu.tdtu.canvasdemo.particle.Particle;
-import vn.edu.tdtu.canvasdemo.particle.ParticlePalette;
-import vn.edu.tdtu.canvasdemo.physics.Body;
-import vn.edu.tdtu.canvasdemo.physics.World;
+import vn.edu.tdtu.motioncanvas.core.FrameClock;
+import vn.edu.tdtu.motioncanvas.particle.Emitter;
+import vn.edu.tdtu.motioncanvas.particle.Particle;
+import vn.edu.tdtu.motioncanvas.particle.ParticlePalette;
+import vn.edu.tdtu.motioncanvas.physics.Body;
+import vn.edu.tdtu.motioncanvas.physics.World;
 
 /** Ghép World (A) + Emitter (A): chạm để thả bóng, mỗi va chạm mạnh bung ra tia lửa. */
 public class PlaygroundView extends View {
@@ -4886,7 +4886,7 @@ public class PlaygroundView extends View {
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <vn.edu.tdtu.canvasdemo.playground.PlaygroundView
+    <vn.edu.tdtu.motioncanvas.playground.PlaygroundView
         android:id="@+id/playground_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -4900,7 +4900,7 @@ public class PlaygroundView extends View {
         android:text="@string/playground_rate"
         android:textAppearance="?attr/textAppearanceTitleSmall" />
 
-    <vn.edu.tdtu.canvasdemo.chart.LineChartView
+    <vn.edu.tdtu.motioncanvas.chart.LineChartView
         android:id="@+id/rate_chart"
         android:layout_width="match_parent"
         android:layout_height="140dp" />
@@ -4909,19 +4909,19 @@ public class PlaygroundView extends View {
 
 - [ ] **Step 4: PlaygroundActivity**
 
-`app/src/main/java/vn/edu/tdtu/canvasdemo/playground/PlaygroundActivity.java`:
+`app/src/main/java/vn/edu/tdtu/MotionCanvas/playground/PlaygroundActivity.java`:
 
 ```java
-package vn.edu.tdtu.canvasdemo.playground;
+package vn.edu.tdtu.motioncanvas.playground;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import vn.edu.tdtu.canvasdemo.R;
-import vn.edu.tdtu.canvasdemo.chart.LineChartView;
-import vn.edu.tdtu.canvasdemo.core.SystemBars;
+import vn.edu.tdtu.motioncanvas.R;
+import vn.edu.tdtu.motioncanvas.chart.LineChartView;
+import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
 public class PlaygroundActivity extends AppCompatActivity {
     private static final float MS_PER_SECOND = 1000f;
@@ -4961,13 +4961,13 @@ public class PlaygroundActivity extends AppCompatActivity {
 Trong `MainActivity.java`: thêm import
 
 ```java
-import vn.edu.tdtu.canvasdemo.playground.PlaygroundActivity;
+import vn.edu.tdtu.motioncanvas.playground.PlaygroundActivity;
 ```
 
 và thêm phần tử cuối vào mảng `DEMOS` (ngay sau dòng `DrawingActivity`):
 
 ```java
-            new Demo(R.string.demo_playground, R.string.demo_playground_desc, PlaygroundActivity.class, PhysicsPreview::new),
+            new Demo(R.string.demo_playground, R.string.demo_playground_desc, PlaygroundActivity.class),
 ```
 
 Trong `AndroidManifest.xml`, thêm cạnh các `<activity>` khác:
@@ -4977,7 +4977,6 @@ Trong `AndroidManifest.xml`, thêm cạnh các `<activity>` khác:
             android:name=".playground.PlaygroundActivity"
             android:exported="false"
             android:label="@string/demo_playground"
-            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 ```
 
