@@ -11,6 +11,7 @@ final class ReplayTimeline {
     private final int[] counts;
     private final int total;
 
+    /** @param counts số điểm của từng nét, theo thứ tự vẽ */
     ReplayTimeline(int[] counts) {
         this.counts = counts.clone();
         int sum = 0;

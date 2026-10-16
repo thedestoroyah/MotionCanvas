@@ -20,6 +20,7 @@ final class DampedOscillation {
         return amplitude * (float) Math.exp(-zeta * omega * t);
     }
 
+    /** Độ lệch tại thời điểm t (giây), dao động quanh 0 trong khoảng ±envelope(t). */
     float valueAt(float t) {
         return envelope(t) * (float) Math.cos(dampedOmega * t);
     }

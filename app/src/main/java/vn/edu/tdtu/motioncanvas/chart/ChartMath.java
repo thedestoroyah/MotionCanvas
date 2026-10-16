@@ -1,5 +1,6 @@
 package vn.edu.tdtu.motioncanvas.chart;
 
+/** Các phép tính thuần của chart (không dùng API Android) để test bằng JUnit. */
 public final class ChartMath {
     private ChartMath() {
     }

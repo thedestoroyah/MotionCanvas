@@ -1,5 +1,6 @@
 package vn.edu.tdtu.motioncanvas.drawing;
 
+/** Phép tính thuần của ColorPickerView, tách ra để test bằng JUnit. */
 final class PickerMath {
     private PickerMath() {
     }

@@ -49,6 +49,12 @@ public class BarChartView extends View {
         return LABELS.length;
     }
 
+    /**
+     * Đổi dữ liệu: các cột co giãn từ giá trị đang hiển thị tới `target` (có overshoot).
+     *
+     * @param target đúng barCount() giá trị, thang 0..MAX_VALUE (ngoài thang sẽ bị kẹp khi vẽ)
+     * @throws IllegalArgumentException nếu số giá trị khác barCount()
+     */
     public void setData(float[] target) {
         if (target.length != LABELS.length) {
             throw new IllegalArgumentException("Cần đúng " + LABELS.length + " giá trị");

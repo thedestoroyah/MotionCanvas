@@ -38,6 +38,7 @@ public final class Stroke {
         this.seed = seed;
     }
 
+    /** Thêm một điểm vào cuối nét; `w` là hệ số độ dày (1 = bình thường). Mảng tự nhân đôi khi đầy. */
     public void addPoint(float x, float y, float w) {
         if ((count + 1) * FIELDS > data.length) data = Arrays.copyOf(data, data.length * 2);
         int base = count * FIELDS;

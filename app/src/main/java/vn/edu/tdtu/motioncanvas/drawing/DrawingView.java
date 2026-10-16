@@ -26,6 +26,7 @@ import java.util.Random;
 public class DrawingView extends View {
     private static final float DEFAULT_WIDTH_DP = 8f;
 
+    /** Báo cho Activity khi replay bắt đầu (true) và khi kết thúc hoặc bị dừng (false). */
     public interface ReplayListener {
         void onReplayChanged(boolean replaying);
     }
@@ -87,10 +88,12 @@ public class DrawingView extends View {
         return color;
     }
 
+    /** Độ dày cho các nét sau, đơn vị pixel (không phải dp). */
     public void setStrokeWidth(float px) {
         strokeWidth = px;
     }
 
+    /** Chế độ đối xứng cho các nét sau; nét cũ giữ chế độ lúc nó được vẽ. */
     public void setSymmetry(Symmetry symmetry) {
         this.symmetry = symmetry;
     }
@@ -107,14 +110,17 @@ public class DrawingView extends View {
         return replaying;
     }
 
+    /** Hoàn tác mục cuối và dựng lại tranh; không làm gì khi đang replay hoặc không còn gì để hoàn tác. */
     public void undo() {
         if (!replaying && history.undo()) rebuild();
     }
 
+    /** Làm lại mục vừa hoàn tác; không làm gì khi đang replay hoặc ngăn redo rỗng. */
     public void redo() {
         if (!replaying && history.redo()) rebuild();
     }
 
+    /** Xóa hết bằng cách thêm mục Stroke.CLEAR vào lịch sử (nên Undo được); bỏ qua khi đang replay hoặc tranh trống. */
     public void clear() {
         if (replaying || history.items().isEmpty()) return;
         history.push(Stroke.CLEAR);

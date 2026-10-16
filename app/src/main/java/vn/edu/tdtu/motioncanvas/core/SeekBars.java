@@ -4,6 +4,7 @@ import android.widget.SeekBar;
 
 import java.util.function.IntConsumer;
 
+/** Tiện ích rút gọn listener của SeekBar. */
 public final class SeekBars {
     private SeekBars() {
     }

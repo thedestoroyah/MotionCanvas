@@ -104,6 +104,12 @@ public class DonutChartView extends View {
         return LABELS.length;
     }
 
+    /**
+     * Đặt dữ liệu mới và chạy lại hiệu ứng quét vòng; bỏ chọn phần đang trượt ra.
+     *
+     * @param values đúng sliceCount() giá trị thô (không cần tổng = 100; giá trị âm coi như 0)
+     * @throws IllegalArgumentException nếu số giá trị khác sliceCount()
+     */
     public void setData(float[] values) {
         if (values.length != LABELS.length) {
             throw new IllegalArgumentException("Cần đúng " + LABELS.length + " giá trị");

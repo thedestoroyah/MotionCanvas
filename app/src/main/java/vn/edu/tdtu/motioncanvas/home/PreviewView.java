@@ -19,6 +19,7 @@ public class PreviewView extends View {
         this.preview = preview;
     }
 
+    /** Chạy lại vòng frame; reset clock để frame đầu không tính thời gian đã tạm dừng. */
     public void resume() {
         if (running) return;
         running = true;
@@ -26,6 +27,7 @@ public class PreviewView extends View {
         postInvalidateOnAnimation();
     }
 
+    /** Dừng vòng frame sau frame hiện tại. */
     public void pause() {
         running = false;
     }

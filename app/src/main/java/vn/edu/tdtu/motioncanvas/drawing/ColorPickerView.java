@@ -54,6 +54,7 @@ public class ColorPickerView extends View {
         markerPaint.setStrokeWidth(MARKER_DP * density);
     }
 
+    /** Đặt màu đang chọn (bỏ qua alpha); vòng hue và ô vuông S/V cập nhật theo. */
     public void setColor(int color) {
         Color.colorToHSV(color, hsv);
         updateSaturationShader();

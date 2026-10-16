@@ -11,6 +11,7 @@ public final class FrameClock {
         this(System::nanoTime);
     }
 
+    /** Dùng trong test: truyền nguồn thời gian giả (nano giây) thay cho System.nanoTime. */
     public FrameClock(LongSupplier nanoTime) {
         this.nanoTime = nanoTime;
     }

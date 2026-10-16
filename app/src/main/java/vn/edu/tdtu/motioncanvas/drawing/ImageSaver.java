@@ -19,6 +19,12 @@ final class ImageSaver {
     private ImageSaver() {
     }
 
+    /**
+     * Ghi `bitmap` thành file PNG trong album Pictures/MotionCanvas.
+     *
+     * @return Uri của ảnh vừa lưu trong MediaStore
+     * @throws IOException nếu không tạo hoặc không ghi được file (file dở dang đã bị xóa)
+     */
     static Uri save(Context context, Bitmap bitmap) throws IOException {
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.DISPLAY_NAME, "drawing_" + System.currentTimeMillis() + ".png");

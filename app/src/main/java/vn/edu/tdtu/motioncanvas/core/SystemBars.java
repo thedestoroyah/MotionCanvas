@@ -6,6 +6,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+/** Tiện ích xử lý status bar / navigation bar khi app chạy edge-to-edge. */
 public final class SystemBars {
     private SystemBars() {
     }

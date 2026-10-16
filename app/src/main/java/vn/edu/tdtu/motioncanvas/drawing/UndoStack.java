@@ -16,18 +16,21 @@ public final class UndoStack<T> {
         undone.clear();
     }
 
+    /** @return false nếu không còn gì để hoàn tác */
     public boolean undo() {
         if (done.isEmpty()) return false;
         undone.push(done.remove(done.size() - 1));
         return true;
     }
 
+    /** @return false nếu ngăn redo rỗng */
     public boolean redo() {
         if (undone.isEmpty()) return false;
         done.add(undone.pop());
         return true;
     }
 
+    /** Các mục đang có hiệu lực, cũ → mới; danh sách chỉ đọc. */
     public List<T> items() {
         return Collections.unmodifiableList(done);
     }

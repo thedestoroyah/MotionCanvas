@@ -12,6 +12,7 @@ import java.util.Random;
 import vn.edu.tdtu.motioncanvas.R;
 import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
+/** Màn Chart: line chart thời gian thực, bar chart và donut đổi dữ liệu ngẫu nhiên bằng nút Xáo trộn. */
 public class ChartActivity extends AppCompatActivity {
     private static final float MIN_RANDOM_VALUE = 10f;
 

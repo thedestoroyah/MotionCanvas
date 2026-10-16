@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+/** Application của app: chạy một lần lúc khởi động, trước mọi Activity. */
 public class MotionCanvasApp extends Application {
     @Override
     public void onCreate() {

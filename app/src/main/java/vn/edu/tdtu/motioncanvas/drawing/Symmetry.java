@@ -21,6 +21,7 @@ public enum Symmetry {
         return rotations * (mirror ? 2 : 1);
     }
 
+    /** Chế độ kế tiếp theo vòng (EIGHT → OFF), dùng cho nút bấm xoay vòng. */
     public Symmetry next() {
         Symmetry[] all = values();
         return all[(ordinal() + 1) % all.length];

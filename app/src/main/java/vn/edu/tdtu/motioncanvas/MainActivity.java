@@ -32,6 +32,7 @@ import vn.edu.tdtu.motioncanvas.home.PreviewView;
 import vn.edu.tdtu.motioncanvas.particle.ParticleActivity;
 import vn.edu.tdtu.motioncanvas.physics.PhysicsActivity;
 
+/** Màn Home: lưới 2 cột, mỗi thẻ chạy một Preview động và mở màn demo tương ứng khi chạm. */
 public class MainActivity extends AppCompatActivity {
     private static final float CARD_MARGIN_DP = 6f;
 

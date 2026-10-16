@@ -33,6 +33,7 @@ import vn.edu.tdtu.motioncanvas.R;
 import vn.edu.tdtu.motioncanvas.core.SeekBars;
 import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
+/** Màn Drawing: nối thanh công cụ (brush, màu, độ dày, đối xứng, undo/redo, replay, lưu ảnh) với DrawingView. */
 public class DrawingActivity extends AppCompatActivity {
     private static final int[] SWATCHES = {
             Color.BLACK, 0xFFE53935, 0xFFFB8C00, 0xFFFDD835, 0xFF43A047, 0xFF1E88E5, 0xFF8E24AA};
