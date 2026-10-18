@@ -85,8 +85,7 @@ public class Emitter {
         if (!(dt > 0f)) return;
         float elapsed = Math.min(dt, MAX_DT);
         int splashCount = 0;
-        for (int i = 0; i < pool.length; i++) {
-            Particle particle = pool[i];
+        for (Particle particle : pool) {
             if (!particle.alive) continue;
             particle.age += elapsed;
             if (particle.age >= particle.life) {
@@ -115,7 +114,7 @@ public class Emitter {
         if (emitting) emitContinuous(elapsed);
     }
 
-    /** Bung tia lửa tại điểm va chạm, kể cả khi đã tắt phát liên tục. */
+    /** Bung tia lửa tại điểm va chạm, kể cả khi đã tắt phát liên tục */
     public void burst(float x, float y, int count) {
         for (int i = 0; i < count; i++) {
             Particle particle = acquire(Mode.FIRE, x, y, false);

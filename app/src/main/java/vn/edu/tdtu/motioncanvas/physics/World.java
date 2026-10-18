@@ -132,8 +132,7 @@ public class World {
             float dy = spring.anchorY - body.y;
             float length = (float) Math.hypot(dx, dy);
             // Tại đúng điểm neo, phương đàn hồi chưa xác định, vẫn áp dụng lực cản
-            float pull = length > 0f
-                    ? spring.stiffness * (length - spring.restLength) / length : 0f;
+            float pull = length > 0f ? spring.stiffness * (length - spring.restLength) / length : 0f;
             float velocityFactor = h / body.mass;
             body.vx += (pull * dx - spring.damping * body.vx) * velocityFactor;
             body.vy += (pull * dy - spring.damping * body.vy) * velocityFactor;

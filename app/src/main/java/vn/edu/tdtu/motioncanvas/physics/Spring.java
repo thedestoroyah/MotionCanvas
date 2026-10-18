@@ -11,8 +11,7 @@ public class Spring {
     public final float stiffness;
     public final float damping;
 
-    public Spring(Body body, float anchorX, float anchorY, float restLength,
-                  float stiffness, float damping) {
+    public Spring(Body body, float anchorX, float anchorY, float restLength, float stiffness, float damping) {
         this.body = Objects.requireNonNull(body, "body");
         this.anchorX = anchorX;
         this.anchorY = anchorY;

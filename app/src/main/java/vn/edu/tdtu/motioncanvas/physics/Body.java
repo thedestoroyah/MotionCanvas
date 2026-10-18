@@ -13,8 +13,7 @@ public class Body {
     public boolean held;
 
     public Body(float x, float y, float radius, int color) {
-        if (!Float.isFinite(radius) || radius <= 0f
-                || !Float.isFinite(radius * radius) || radius * radius == 0f) {
+        if (!Float.isFinite(radius) || radius <= 0f || !Float.isFinite(radius * radius) || radius * radius == 0f) {
             throw new IllegalArgumentException("Bán kính phải dương và có khối lượng hữu hạn");
         }
         this.x = x;
