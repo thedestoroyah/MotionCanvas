@@ -31,6 +31,7 @@ public class PlaygroundView extends View {
     private static final float MAX_RADIUS_DP = 26f;
     private static final float MAX_SIDE_SPEED_DP = 300f;
     private static final float SPARK_SHRINK = 0.5f;
+    private static final float MIN_SPARK_SPEED_DP = 200f;
     private static final int BACKGROUND = 0xFF1A237E;
     private static final int[] PALETTE = {0xFFFFCA28, 0xFF26C6DA, 0xFFEC407A, 0xFF9CCC65};
 
@@ -53,7 +54,10 @@ public class PlaygroundView extends View {
         sparks = new Emitter(SPARK_CAPACITY, density, random);
         sparks.setEmitting(false); // chỉ bung hạt khi có va chạm
         sparkPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.ADD));
+        float minSparkSpeed = MIN_SPARK_SPEED_DP * density;
         world.setCollisionListener((x, y, impactSpeed) -> {
+            // Đống bóng nằm yên vẫn rung nhẹ: chỉ tính cú va chạm thật sự mạnh
+            if (impactSpeed < minSparkSpeed) return;
             sparks.burst(x, y, BURST_SIZE);
             collisionsSinceSample++;
         });

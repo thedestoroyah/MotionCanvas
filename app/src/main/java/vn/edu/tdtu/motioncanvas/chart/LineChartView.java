@@ -173,7 +173,9 @@ public class LineChartView extends View {
             hi = Math.max(hi, v);
         }
         float pad = Math.max((hi - lo) * Y_PADDING_RATIO, 1f);
-        return new ChartScale(lo - pad, hi + pad, plot.bottom, plot.top);
+        // Dữ liệu không âm (số đếm, phần trăm) thì trục không xuống dưới 0
+        float bottom = lo >= 0f ? Math.max(0f, lo - pad) : lo - pad;
+        return new ChartScale(bottom, hi + pad, plot.bottom, plot.top);
     }
 
     @Override
