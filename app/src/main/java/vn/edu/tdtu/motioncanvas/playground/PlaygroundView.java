@@ -8,9 +8,11 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.Random;
 
+import vn.edu.tdtu.motioncanvas.R;
 import vn.edu.tdtu.motioncanvas.core.FrameClock;
 import vn.edu.tdtu.motioncanvas.particle.Emitter;
 import vn.edu.tdtu.motioncanvas.particle.Particle;
@@ -41,6 +43,7 @@ public class PlaygroundView extends View {
     private final float density;
     private int collisionsSinceSample;
     private boolean running;
+    private Toast limitToast;
 
     public PlaygroundView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -71,6 +74,7 @@ public class PlaygroundView extends View {
 
     public void pause() {
         running = false;
+        cancelLimitToast();
     }
 
     @Override
@@ -105,7 +109,7 @@ public class PlaygroundView extends View {
             float radius = (MIN_RADIUS_DP + random.nextFloat() * (MAX_RADIUS_DP - MIN_RADIUS_DP)) * density;
             Body ball = new Body(e.getX(), e.getY(), radius, PALETTE[random.nextInt(PALETTE.length)]);
             ball.vx = (random.nextFloat() * 2f - 1f) * MAX_SIDE_SPEED_DP * density;
-            world.addBody(ball); // đủ MAX_BODIES thì bỏ qua — chỉ là sân chơi
+            if (!world.addBody(ball)) showLimitToast();
             return true;
         }
         if (e.getActionMasked() == MotionEvent.ACTION_UP) {
@@ -113,6 +117,21 @@ public class PlaygroundView extends View {
             return true;
         }
         return super.onTouchEvent(e);
+    }
+
+    /** Thông báo đã đủ MAX_BODIES; hủy Toast cũ để chạm liên tục không xếp hàng thông báo. */
+    private void showLimitToast() {
+        cancelLimitToast();
+        limitToast = Toast.makeText(getContext(), getResources().getString(R.string.playground_limit, MAX_BODIES),
+                Toast.LENGTH_SHORT);
+        limitToast.show();
+    }
+
+    private void cancelLimitToast() {
+        if (limitToast != null) {
+            limitToast.cancel();
+            limitToast = null;
+        }
     }
 
     @Override
