@@ -175,8 +175,19 @@ public class DonutChartView extends View {
         } else {
             center = getContext().getString(R.string.chart_tap_hint);
         }
+        fitCenterText(center);
         canvas.drawText(center, centerX, centerY + centerPaint.getTextSize() / 3f, centerPaint);
         drawLegend(canvas);
+    }
+
+    /** Thu nhỏ chữ giữa vòng cho vừa lòng vòng, không lấn sang cung màu. */
+    private void fitCenterText(String text) {
+        float defaultSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, CENTER_TEXT_SP,
+                getResources().getDisplayMetrics());
+        centerPaint.setTextSize(defaultSize);
+        float available = 2f * (radius - ringWidth / 2f - MARGIN_DP * density);
+        float measured = centerPaint.measureText(text);
+        if (available > 0f && measured > available) centerPaint.setTextSize(defaultSize * available / measured);
     }
 
     private void drawLegend(Canvas canvas) {

@@ -33,6 +33,12 @@ public class Emitter {
     private int nextFree;
     private int aliveCount;
 
+    /**
+     * @param capacity số hạt tối đa trong pool
+     * @param unit     số px cho một dp, dùng để quy đổi vận tốc và kích thước
+     * @param random   nguồn ngẫu nhiên (truyền Random có seed khi cần kết quả lặp lại)
+     * @throws IllegalArgumentException nếu capacity âm hoặc unit không dương
+     */
     public Emitter(int capacity, float unit, Random random) {
         if (capacity < 0) throw new IllegalArgumentException("capacity không được âm");
         if (!Float.isFinite(unit) || unit <= 0f) {
@@ -47,11 +53,13 @@ public class Emitter {
         }
     }
 
+    /** Đặt vị trí nguồn phát liên tục (px). */
     public void setPosition(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
+    /** Đổi chế độ cho hạt sinh sau đó; hạt đang sống giữ chế độ lúc sinh. */
     public void setMode(Mode mode) {
         this.mode = Objects.requireNonNull(mode, "mode");
     }
@@ -60,10 +68,12 @@ public class Emitter {
         return mode;
     }
 
+    /** Đặt tung độ sàn (px): giọt nước chạm sàn thì tan và bắn ra vài giọt nhỏ. */
     public void setFloor(float y) {
         floorY = y;
     }
 
+    /** Bật/tắt phát liên tục; burst() vẫn hoạt động khi tắt. */
     public void setEmitting(boolean on) {
         emitting = on;
         if (!on) emissionRemainder = 0d;
@@ -77,10 +87,12 @@ public class Emitter {
         return pool[index];
     }
 
+    /** Số hạt đang sống trong pool. */
     public int aliveCount() {
         return aliveCount;
     }
 
+    /** Cập nhật mọi hạt và phát hạt mới; dt tính bằng giây, bị chặn tối đa MAX_DT, dt không dương thì bỏ qua. */
     public void update(float dt) {
         if (!(dt > 0f)) return;
         float elapsed = Math.min(dt, MAX_DT);

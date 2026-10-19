@@ -5,6 +5,7 @@ final class GestureMath {
     private GestureMath() {
     }
 
+    /** Cắt value vào [min, max]. @throws IllegalArgumentException nếu min lớn hơn max. */
     static float clamp(float value, float min, float max) {
         if (min > max) throw new IllegalArgumentException("Khoảng giới hạn bị đảo");
         if (value < min) return min;

@@ -71,6 +71,7 @@ public class PhysicsView extends View {
         return world;
     }
 
+    /** Chạy vòng lặp mô phỏng; gọi ở onResume. */
     public void resume() {
         if (running) return;
         clock.reset();
@@ -78,6 +79,7 @@ public class PhysicsView extends View {
         postInvalidateOnAnimation();
     }
 
+    /** Dừng vòng lặp, thả bóng đang kéo và hủy Toast; gọi ở onPause. */
     public void pause() {
         running = false;
         finishTouch();

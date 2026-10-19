@@ -11,6 +11,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup;
 import vn.edu.tdtu.motioncanvas.R;
 import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
+/** Màn Particle: chọn lửa/nước bằng nhóm nút và nối vòng đời với ParticleView. */
 public class ParticleActivity extends AppCompatActivity {
     private ParticleView particleView;
 

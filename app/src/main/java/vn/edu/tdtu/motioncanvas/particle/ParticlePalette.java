@@ -1,9 +1,11 @@
 package vn.edu.tdtu.motioncanvas.particle;
 
+/** Bảng màu theo tuổi hạt: t = 0 (mới sinh) đến 1 (sắp chết), ngoài khoảng thì bị cắt. */
 public final class ParticlePalette {
     private ParticlePalette() {
     }
 
+    /** Màu ARGB của hạt lửa: vàng đỏ, mờ dần theo tuổi. */
     public static int fire(float t) {
         float remaining = 1f - clamp(t);
         int alpha = (int) (255f * remaining);
@@ -12,6 +14,7 @@ public final class ParticlePalette {
         return argb(alpha, 255, green, blue);
     }
 
+    /** Màu ARGB của giọt nước: xanh, mờ nhẹ theo tuổi. */
     public static int water(float t) {
         int alpha = (int) (220f * (1f - 0.7f * clamp(t)));
         return argb(alpha, 90, 170, 255);

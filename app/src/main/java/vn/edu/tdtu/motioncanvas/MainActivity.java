@@ -27,6 +27,7 @@ import vn.edu.tdtu.motioncanvas.home.DrawingPreview;
 import vn.edu.tdtu.motioncanvas.home.GesturePreview;
 import vn.edu.tdtu.motioncanvas.home.ParticlePreview;
 import vn.edu.tdtu.motioncanvas.home.PhysicsPreview;
+import vn.edu.tdtu.motioncanvas.home.PlaygroundPreview;
 import vn.edu.tdtu.motioncanvas.home.Preview;
 import vn.edu.tdtu.motioncanvas.home.PreviewView;
 import vn.edu.tdtu.motioncanvas.particle.ParticleActivity;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             new Demo(R.string.demo_chart, R.string.demo_chart_desc, ChartActivity.class, ChartPreview::new),
             new Demo(R.string.demo_particle, R.string.demo_particle_desc, ParticleActivity.class, ParticlePreview::new),
             new Demo(R.string.demo_drawing, R.string.demo_drawing_desc, DrawingActivity.class, DrawingPreview::new),
-            new Demo(R.string.demo_playground, R.string.demo_playground_desc, PlaygroundActivity.class, PhysicsPreview::new),
+            new Demo(R.string.demo_playground, R.string.demo_playground_desc, PlaygroundActivity.class, PlaygroundPreview::new),
     };
 
     private final List<PreviewView> previews = new ArrayList<>();

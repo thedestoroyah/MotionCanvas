@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdtu.motioncanvas.R;
 import vn.edu.tdtu.motioncanvas.core.SystemBars;
 
+/** Màn Gesture: chứa GestureView và dừng animation khi rời màn. */
 public class GestureActivity extends AppCompatActivity {
     private GestureView gestureView;
 

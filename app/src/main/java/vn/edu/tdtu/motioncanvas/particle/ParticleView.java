@@ -88,12 +88,14 @@ public class ParticleView extends View {
         setClickable(true);
     }
 
+    /** Chọn lửa hoặc nước cho hạt sinh từ giờ. */
     public void setMode(Emitter.Mode mode) {
         // Chỉ đổi mode cho hạt mới, hạt cũ giữ mode lúc sinh
         emitter.setMode(mode);
         invalidate();
     }
 
+    /** Chạy vòng lặp vẽ và bộ đếm FPS; gọi ở onResume. */
     public void resume() {
         if (running || isInEditMode()) return;
         clock.reset();
@@ -107,6 +109,7 @@ public class ParticleView extends View {
         postInvalidateOnAnimation();
     }
 
+    /** Dừng vòng lặp và bộ đếm FPS; gọi ở onPause. */
     public void pause() {
         running = false;
         activePointerId = NO_POINTER;

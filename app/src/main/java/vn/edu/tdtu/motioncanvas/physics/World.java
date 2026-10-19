@@ -32,12 +32,19 @@ public class World {
     private float restitution = 0.8f;
     private CollisionListener collisionListener;
 
+    /**
+     * @param width     chiều rộng vùng mô phỏng (px)
+     * @param height    chiều cao vùng mô phỏng (px)
+     * @param maxBodies số bóng tối đa, vượt quá thì addBody trả về false
+     * @throws IllegalArgumentException nếu maxBodies âm hoặc kích thước không hợp lệ
+     */
     public World(float width, float height, int maxBodies) {
         if (maxBodies < 0) throw new IllegalArgumentException("maxBodies không được âm");
         this.maxBodies = maxBodies;
         setBounds(width, height);
     }
 
+    /** Đặt vùng mô phỏng (px); bóng bị chặn bởi bốn cạnh vùng này. @throws IllegalArgumentException nếu âm hoặc không hữu hạn. */
     public void setBounds(float w, float h) {
         if (!Float.isFinite(w) || !Float.isFinite(h) || w < 0f || h < 0f) {
             throw new IllegalArgumentException("Kích thước vùng mô phỏng không hợp lệ");
@@ -46,16 +53,19 @@ public class World {
         height = h;
     }
 
+    /** Đặt gia tốc rơi xuống (px/s²); 0 = không trọng lực. */
     public void setGravity(float pxPerSec2) {
         if (!Float.isFinite(pxPerSec2)) throw new IllegalArgumentException("Trọng lực phải hữu hạn");
         gravity = pxPerSec2;
     }
 
+    /** Đặt độ nảy khi va chạm: 0 = không nảy, 1 = nảy lại đủ tốc độ; ngoài khoảng thì bị cắt về [0, 1]. */
     public void setRestitution(float e) {
         if (Float.isNaN(e)) throw new IllegalArgumentException("Độ nảy không được là NaN");
         restitution = Math.max(0f, Math.min(e, 1f));
     }
 
+    /** @return true nếu thêm được; false nếu đã đủ maxBodies. */
     public boolean addBody(Body b) {
         Objects.requireNonNull(b, "body");
         if (bodies.size() == maxBodies) return false;
@@ -68,6 +78,7 @@ public class World {
         springs.add(Objects.requireNonNull(s, "spring"));
     }
 
+    /** Xóa mọi bóng và lò xo. */
     public void clear() {
         springs.clear();
         bodies.clear();
@@ -82,6 +93,7 @@ public class World {
         return springView;
     }
 
+    /** @return bóng nằm trên cùng (thêm sau cùng) chứa điểm (x, y) tính bằng px, hoặc null nếu không có. */
     public Body findBodyAt(float x, float y) {
         for (int index = bodies.size() - 1; index >= 0; index--) {
             Body body = bodies.get(index);
@@ -92,6 +104,7 @@ public class World {
         return null;
     }
 
+    /** Đặt nơi nhận sự kiện va chạm; truyền null để tắt. Chỉ báo va chạm có tốc độ từ MIN_IMPACT_SPEED trở lên. */
     public void setCollisionListener(CollisionListener listener) {
         collisionListener = listener;
     }
@@ -178,9 +191,11 @@ public class World {
     private void resolvePair(Body a, Body b) {
         float dx = b.x - a.x;
         float dy = b.y - a.y;
-        float distance = (float) Math.hypot(dx, dy);
-        float overlap = a.radius + b.radius - distance;
-        if (overlap <= 0f) return;
+        float radii = a.radius + b.radius;
+        float distanceSquared = dx * dx + dy * dy;
+        if (distanceSquared >= radii * radii) return; // chưa chạm: khỏi tính căn
+        float distance = (float) Math.hypot(dx, dy); // giữ nguyên phép cũ để kết quả không đổi
+        float overlap = radii - distance;
 
         float inverseA = a.inverseMass();
         float inverseB = b.inverseMass();
