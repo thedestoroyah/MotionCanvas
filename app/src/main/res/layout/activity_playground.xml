@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <vn.edu.tdtu.motioncanvas.playground.PlaygroundView
+        android:id="@+id/playground_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/playground_canvas_description" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/playground_rate"
+        android:textAppearance="?attr/textAppearanceTitleSmall" />
+
+    <vn.edu.tdtu.motioncanvas.chart.LineChartView
+        android:id="@+id/rate_chart"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" />
+</LinearLayout>

@@ -10,6 +10,10 @@
     <string name="demo_particle_desc">Hệ thống hạt với object pool</string>
     <string name="demo_drawing">Drawing</string>
     <string name="demo_drawing_desc">Brush tùy chỉnh và bảng chọn màu</string>
+    <string name="demo_playground">Playground</string>
+    <string name="demo_playground_desc">Va chạm bung hạt + biểu đồ realtime</string>
+    <string name="playground_rate">Va chạm / giây</string>
+    <string name="playground_canvas_description">Vùng thả bóng, mỗi va chạm mạnh bung tia lửa</string>
     <string name="coming_soon">Đang phát triển…</string>
     <string name="clear">Xóa hết</string>
     <string name="chart_line">Line chart realtime</string>

@@ -31,6 +31,7 @@ import vn.edu.tdtu.motioncanvas.home.Preview;
 import vn.edu.tdtu.motioncanvas.home.PreviewView;
 import vn.edu.tdtu.motioncanvas.particle.ParticleActivity;
 import vn.edu.tdtu.motioncanvas.physics.PhysicsActivity;
+import vn.edu.tdtu.motioncanvas.playground.PlaygroundActivity;
 
 /** Màn Home: lưới 2 cột, mỗi thẻ chạy một Preview động và mở màn demo tương ứng khi chạm. */
 public class MainActivity extends AppCompatActivity {
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             new Demo(R.string.demo_chart, R.string.demo_chart_desc, ChartActivity.class, ChartPreview::new),
             new Demo(R.string.demo_particle, R.string.demo_particle_desc, ParticleActivity.class, ParticlePreview::new),
             new Demo(R.string.demo_drawing, R.string.demo_drawing_desc, DrawingActivity.class, DrawingPreview::new),
+            new Demo(R.string.demo_playground, R.string.demo_playground_desc, PlaygroundActivity.class, PhysicsPreview::new),
     };
 
     private final List<PreviewView> previews = new ArrayList<>();

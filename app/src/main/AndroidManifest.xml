@@ -60,6 +60,12 @@
             android:label="@string/demo_drawing"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".playground.PlaygroundActivity"
+            android:exported="false"
+            android:label="@string/demo_playground"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
