@@ -22,9 +22,13 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.button.MaterialButton;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,6 +44,9 @@ public class DrawingActivity extends AppCompatActivity {
     private static final float SWATCH_DP = 32f;
     private static final float SWATCH_MARGIN_DP = 4f;
     private static final float PICKER_DP = 280f;
+    private static final float PREVIEW_DOT_DP = 20f;
+    private static final float SELECTED_STROKE_DP = 3f;
+    private static final int SELECTED_STROKE_COLOR = 0xFF212121;
 
     private final ExecutorService io = Executors.newSingleThreadExecutor();
     private final ActivityResultLauncher<String> storagePermission = registerForActivityResult(
@@ -52,6 +59,8 @@ public class DrawingActivity extends AppCompatActivity {
             });
     private DrawingView drawingView;
     private Button symmetryButton;
+    private MaterialButton paletteButton;
+    private final List<GradientDrawable> swatchDots = new ArrayList<>();
     private float density;
 
     @Override
@@ -74,7 +83,9 @@ public class DrawingActivity extends AppCompatActivity {
             showSymmetry();
         });
         showSymmetry();
-        findViewById(R.id.btn_palette).setOnClickListener(v -> showColorPicker());
+        paletteButton = findViewById(R.id.btn_palette);
+        paletteButton.setOnClickListener(v -> showColorPicker());
+        showColor();
         findViewById(R.id.btn_undo).setOnClickListener(v -> drawingView.undo());
         findViewById(R.id.btn_redo).setOnClickListener(v -> drawingView.redo());
         findViewById(R.id.btn_clear).setOnClickListener(v -> drawingView.clear());
@@ -130,18 +141,41 @@ public class DrawingActivity extends AppCompatActivity {
             GradientDrawable dot = new GradientDrawable();
             dot.setShape(GradientDrawable.OVAL);
             dot.setColor(color);
-            dot.setStroke((int) density, Color.LTGRAY);
+            swatchDots.add(dot);
 
             View swatch = new View(this);
             swatch.setBackground(dot);
             swatch.setContentDescription(getString(R.string.swatch_desc,
                     String.format(Locale.US, "#%06X", color & 0xFFFFFF)));
-            swatch.setOnClickListener(v -> drawingView.setColor(color));
+            swatch.setOnClickListener(v -> chooseColor(color));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
             params.setMargins(margin, margin, margin, margin);
             row.addView(swatch, params);
         }
+    }
+
+    private void chooseColor(int color) {
+        drawingView.setColor(color);
+        showColor();
+    }
+
+    /** Viền đậm quanh ô màu đang chọn (nếu có trong danh sách) và chấm màu hiện tại trên nút "Màu…". */
+    private void showColor() {
+        int current = drawingView.getColor();
+        for (int i = 0; i < swatchDots.size(); i++) {
+            boolean selected = SWATCHES[i] == current;
+            swatchDots.get(i).setStroke((int) ((selected ? SELECTED_STROKE_DP : 1f) * density),
+                    selected ? SELECTED_STROKE_COLOR : Color.LTGRAY);
+        }
+        GradientDrawable dot = new GradientDrawable();
+        dot.setShape(GradientDrawable.OVAL);
+        dot.setColor(current);
+        dot.setStroke((int) density, Color.LTGRAY);
+        int size = (int) (PREVIEW_DOT_DP * density);
+        dot.setSize(size, size);
+        paletteButton.setIconTint(null); // giữ nguyên màu, không nhuộm theo màu chữ
+        paletteButton.setIcon(dot);
     }
 
     private void showColorPicker() {
@@ -153,7 +187,7 @@ public class DrawingActivity extends AppCompatActivity {
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.pick_color)
                 .setView(frame)
-                .setPositiveButton(android.R.string.ok, (dialog, which) -> drawingView.setColor(picker.getColor()))
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> chooseColor(picker.getColor()))
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
     }
