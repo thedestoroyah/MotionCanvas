@@ -21,4 +21,15 @@
     <style name="Widget.MotionCanvas.ActionBar" parent="Widget.Material3.ActionBar.Solid">
         <item name="displayOptions">showTitle|homeAsUp</item>
     </style>
+
+    <!-- Nút thao tác ở đáy màn Drawing: icon trên, nhãn nhỏ một dòng để không xuống dòng khi chữ to -->
+    <style name="Widget.MotionCanvas.ActionButton" parent="Widget.Material3.Button.TextButton">
+        <item name="iconGravity">top</item>
+        <item name="iconPadding">2dp</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelMedium</item>
+    </style>
 </resources>

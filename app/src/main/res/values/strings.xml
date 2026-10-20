@@ -28,7 +28,6 @@
     <string name="brush_spray">Phun</string>
     <string name="brush_neon">Neon</string>
     <string name="brush_eraser">Tẩy</string>
-    <string name="stroke_width">Độ dày</string>
     <string name="palette">Màu…</string>
     <string name="undo">Hoàn tác</string>
     <string name="redo">Làm lại</string>
@@ -43,7 +42,7 @@
     <string name="brush_fill">Đổ màu</string>
     <string name="symmetry_label">Đối xứng: %1$s</string>
     <string name="symmetry_off">Tắt</string>
-    <string name="symmetry_mirror">Gương</string>
+    <string name="symmetry_mirror">2</string>
     <string name="replay">Phát lại</string>
     <string name="chart_smooth">Đường cong</string>
     <string name="home_subtitle">Animation &amp; Canvas · Android</string>
@@ -72,4 +71,19 @@
     <string name="particle_count">Hạt: %1$d / %2$d</string>
     <string name="particle_hint">Chạm hoặc kéo để di chuyển nguồn phát. Chọn Lửa hoặc Nước.</string>
     <string name="particle_canvas_description">Vùng mô phỏng hạt lửa và nước, kéo để di chuyển nguồn phát</string>
+    <!-- Thứ tự phải khớp DrawingActivity.BRUSHES -->
+    <string-array name="brushes">
+        <item>@string/brush_pen</item>
+        <item>@string/brush_marker</item>
+        <item>@string/brush_spray</item>
+        <item>@string/brush_neon</item>
+        <item>@string/brush_calligraphy</item>
+        <item>@string/brush_rainbow</item>
+        <item>@string/brush_fill</item>
+        <item>@string/brush_eraser</item>
+    </string-array>
+    <string name="brush_label">Loại bút</string>
+    <string name="brush_preview">Xem trước nét vẽ, chạm để chọn độ dày</string>
+    <string name="stroke_width_value">Độ dày: %1$d dp</string>
+    <string name="width_dp">%1$d dp</string>
 </resources>

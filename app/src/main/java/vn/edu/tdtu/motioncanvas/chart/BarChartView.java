@@ -80,6 +80,8 @@ public class BarChartView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         ChartAxes.plotArea(plot, w, h, density);
+        // Chừa chỗ phía trên cho nhãn giá trị của cột cao nhất, nếu không số bị cắt khi giá trị gần MAX_VALUE
+        plot.top = Math.max(plot.top, labelPaint.getTextSize() + LABEL_GAP_DP * density);
     }
 
     private float slotWidth() {
